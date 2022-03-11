@@ -1,7 +1,7 @@
 describe('Response Validation', () => {
   describe('Response verification', () => {
     it('she status code should be 200', () => {});
-    describe('The response Body', () => {
+    describe('The response body', () => {
       it('should match exactly', () => {});
       it('should match partially', () => {});
       it('should match the schema', () => {});
