@@ -1,10 +1,10 @@
 describe('Response Modification', () => {
   describe('Modified response verification', () => {
-    it('The status code should not be 200', () => {});
+    it('the status code should not be 200', () => {});
     describe('The modified response body', () => {
-      it('Should match exactly', () => {});
-      it('Should match partially', () => {});
-      it('Should match the schema', () => {});
+      it('should match exactly', () => {});
+      it('should match partially', () => {});
+      it('should match the schema', () => {});
     });
   });
   //TBD
