@@ -1,5 +1,6 @@
 describe('Request Validation', () => {
   describe('Request verification', () => {
-    //TBD
+    it('Should be a GET method', () => {});
+    it('Should have the correct URL', () => {});
   });
 });
