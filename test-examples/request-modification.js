@@ -3,6 +3,5 @@ describe('Request Modification', () => {
     it('should be a GET method', () => {});
     it('should have the modified URL', () => {});
     it('should have an additional property', () => {});
-    //TBD
   });
 });
