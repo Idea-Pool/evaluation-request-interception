@@ -1,0 +1,5 @@
+{
+  "chromeWebSecurity": false,
+  "defaultCommandTimeout": 10000,
+  "integrationFolder": "./cypress/interceptors"
+}

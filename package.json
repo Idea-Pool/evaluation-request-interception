@@ -1,0 +1,20 @@
+{
+  "name": "evaluation-request-interception",
+  "version": "1.0.0",
+  "description": "Tool evaluation",
+  "scripts": {
+    "test:cypress": "cypress run",
+    "test:cypress:gui": "cypress open",
+    "test:cypress:response-validation": "cypress run --spec 'cypress/interceptors/response-validation.spec.js'",
+    "test:cypress:response-modification": "cypress run --spec 'cypress/interceptors/response-modification.spec.js'",
+    "test:cypress:request-validation": "cypress run --spec 'cypress/interceptors/request-validation.spec.js'",
+    "test:cypress:request-modification": "cypress run --spec 'cypress/interceptors/request-modification.spec.js'"
+  },
+  "author": "Various Authors",
+  "license": "MIT",
+  "homepage": "https://github.com/Idea-Pool/evaluation-request-interception#readme",
+  "dependencies": {
+    "@cypress/schema-tools": "^4.7.9",
+    "cypress": "^9.5.2"
+  }
+}
