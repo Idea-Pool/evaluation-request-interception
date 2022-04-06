@@ -4,18 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx wdio run wdio.conf.ts"
+    "test": "npx wdio run wdio.conf.ts",
+    "test:requestModification": "npx wdio run wdio.conf.ts --suite requestModification",
+    "test:requestValidation": "npx wdio run wdio.conf.ts --suite requestValidation",
+    "test:responseModification": "npx wdio run wdio.conf.ts --suite responseModification",
+    "test:responseValidation": "npx wdio run wdio.conf.ts --suite responseValidation"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@wdio/cli": "^7.16.13"
+    "@wdio/cli": "^7.16.13",
+    "chai": "^4.3.6",
+    "jsonschema": "^1.4.0",
+    "mocha": "^9.2.1"
   },
   "devDependencies": {
     "@wdio/local-runner": "^7.16.13",
     "@wdio/mocha-framework": "^7.16.13",
     "@wdio/spec-reporter": "^7.16.13",
-    "chromedriver": "^97.0.0",
+    "chromedriver": "^99.0.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4",
     "wdio-chromedriver-service": "^7.2.6",
