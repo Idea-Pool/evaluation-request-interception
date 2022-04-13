@@ -1,0 +1,5 @@
+{
+    "BASE_URL":"https://reqres.in/",
+    "USER_LIST_PATH":"api/users?page=2",
+    "SINGLE_USER_PATH":"/api/users/2"
+}

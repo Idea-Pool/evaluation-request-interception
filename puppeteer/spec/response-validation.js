@@ -7,7 +7,7 @@ const chaiAsPromised = require('chai-as-promised');
 const chaiDeepMatch = require('chai-deep-match');
 const expect = chai.expect;
 const { StatusCodes } = require('http-status-codes');
-const expectedResponse = require('../data/response.json');
+const {userListResponseBody,singleUserResponseBody,maxResponseTime} = require('../data/response.json');
 const expectedSchema = require('../data/json-schema.json');
 chai.use(chaiAsPromised);
 chai.use(chaiDeepMatch);
@@ -48,12 +48,12 @@ describe('Response Validation', () => {
       it('should match exactly', () =>
         expect(
           interceptedRequests[0].response().json()
-        ).to.be.eventually.deep.equal(expectedResponse.userListResponseBody));
+        ).to.be.eventually.deep.equal(userListResponseBody));
 
-      it.skip('should match partially', () =>
+      it('should match partially', () =>
         expect(
           interceptedRequests[0].response().json()
-        ).to.be.eventually.deep.match('someObject'));
+        ).to.be.eventually.deep.match(singleUserResponseBody.data));
 
       it('should match the schema', async () =>
         expect(await interceptedRequests[0].response().json()).to.be.jsonSchema(
@@ -69,7 +69,7 @@ describe('Response Validation', () => {
   it('the response duration should not be longer than 1s', () => {
     const responseTime =
       performanceData.responseEnd - performanceData.requestStart;
-    return expect(responseTime).to.be.below(expectedResponse.maxResponseTime);
+    return expect(responseTime).to.be.below(maxResponseTime);
   });
   
 

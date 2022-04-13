@@ -6,8 +6,7 @@ const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const chaiDeepMatch = require('chai-deep-match');
 const expect = chai.expect;
-const expectedResponse = require('../data/response.json');
-const expectedSchema = require('../data/json-schema.json');
+const mockResponseSchema = require('../schemas/mock.json')
 const { mockResponse } = require('../data/response.json');
 chai.use(chaiAsPromised);
 chai.use(chaiDeepMatch);
@@ -58,8 +57,15 @@ describe('Response Modification', () => {
           interceptedRequest.response().json()
         ).to.eventually.be.deep.equal(mockResponse.body);
       });
-      it('should match partially', () => {});
-      it('should match the schema', () => {});
+      it('should match partially', () =>
+        expect(
+          interceptedRequest.response().json()
+        ).to.be.eventually.deep.match(mockResponse.body.id));
+
+      it('should match the schema', async () =>
+        expect(await interceptedRequest.response().json()).to.be.jsonSchema(
+          mockResponseSchema
+        ));
     });
   });
   afterEach(async () => {

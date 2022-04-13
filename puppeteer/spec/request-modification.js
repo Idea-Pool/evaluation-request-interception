@@ -11,7 +11,6 @@ const chaiAsPromised = require('chai-as-promised');
 const chaiDeepMatch = require('chai-deep-match');
 const expect = chai.expect;
 const expectedResponse = require('../data/response.json');
-const expectedSchema = require('../data/json-schema.json');
 chai.use(chaiAsPromised);
 chai.use(chaiDeepMatch);
 chai.use(require('chai-json-schema'));

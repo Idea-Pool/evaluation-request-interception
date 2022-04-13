@@ -1,0 +1,17 @@
+{
+   
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "mock": {
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "mock"
+    ]
+  }
