@@ -4,10 +4,10 @@
   "description": "Idea Pool TA tool evaluation project - Request interception for UI testing",
   "main": "browser-options.js",
   "scripts": {
-    "test:puppeteer:response-validation": "mocha ./puppeteer/spec/response-modification.js --timeout 50000",
-    "test:puppeteer:response-modification": "mocha ./puppeteer/spec/response-modification.js --timeout 50000",
-    "test:puppeteer:request-validation": "mocha ./puppeteer/spec/request-validation.js --timeout 50000",
-    "test:puppeteer:request-modification": "mocha ./puppeteer/spec/request-modification.js --timeout 50000"
+    "test:puppeteer:response-validation": "mocha ./puppeteer/spec/response-modification.js",
+    "test:puppeteer:response-modification": "mocha ./puppeteer/spec/response-modification.js",
+    "test:puppeteer:request-validation": "mocha ./puppeteer/spec/request-validation.js",
+    "test:puppeteer:request-modification": "mocha ./puppeteer/spec/request-modification.js"
   },
   "repository": {
     "type": "git",
