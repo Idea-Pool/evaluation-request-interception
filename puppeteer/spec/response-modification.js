@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer');
-
 const userListSelector = "[data-id='users']";
 const { BASE_URL, USER_LIST_PATH } = require('../data/constants.json');
 const chai = require('chai');

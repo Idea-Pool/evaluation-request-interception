@@ -70,7 +70,6 @@ describe('Response Validation', () => {
       performanceData.responseEnd - performanceData.requestStart;
     return expect(responseTime).to.be.below(maxResponseTime);
   });
-  
 
   after(async () => {
     await browser.close();
