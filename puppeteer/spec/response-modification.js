@@ -1,12 +1,12 @@
 const puppeteer = require('puppeteer');
-const browserOptions = require('../browser-options');
+
 const userListSelector = "[data-id='users']";
 const { BASE_URL, USER_LIST_PATH } = require('../data/constants.json');
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const chaiDeepMatch = require('chai-deep-match');
 const expect = chai.expect;
-const mockResponseSchema = require('../schemas/mock.json')
+const mockResponseSchema = require('../schemas/mock.json');
 const { mockResponse } = require('../data/response.json');
 chai.use(chaiAsPromised);
 chai.use(chaiDeepMatch);
@@ -15,13 +15,12 @@ let browser, page, interceptedRequest;
 
 describe('Response Modification', () => {
   before(async function () {
-    browser = await puppeteer.launch(browserOptions);
+    browser = await puppeteer.launch();
   });
   beforeEach(async () => {
     page = await browser.newPage();
     await page.goto(BASE_URL);
     await page.setRequestInterception(true);
-    
   });
   describe('Modified response verification', () => {
     it('the status code should not be 200', async () => {
@@ -69,6 +68,9 @@ describe('Response Modification', () => {
     });
   });
   afterEach(async () => {
-   await page.close();
+    await page.close();
+  });
+  after(async () => {
+    await browser.close();
   });
 });

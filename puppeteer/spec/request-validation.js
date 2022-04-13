@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const browserOptions = require('../browser-options');
+
 const userListSelector = "[data-id='users']";
 const { BASE_URL, USER_LIST_PATH } = require('../data/constants.json');
 const chai = require('chai');
@@ -13,7 +13,7 @@ let browser, page, interceptedRequest;
 
 describe('Request Validation', () => {
   before(async function () {
-    browser = await puppeteer.launch(browserOptions);
+    browser = await puppeteer.launch();
     page = await browser.newPage();
     await page.setCacheEnabled(false);
     await page.goto(BASE_URL);

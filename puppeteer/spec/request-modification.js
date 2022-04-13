@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer');
-const browserOptions = require('../browser-options');
 const userListSelector = "[data-id='users']";
 const {
   BASE_URL,
@@ -18,7 +17,7 @@ let browser, page, interceptedRequest;
 
 describe('Request Modification', () => {
   before(async function () {
-    browser = await puppeteer.launch(browserOptions);
+    browser = await puppeteer.launch();
   });
   beforeEach(async () => {
     page = await browser.newPage();
