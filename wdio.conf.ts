@@ -48,20 +48,20 @@ export const config: WebdriverIO.Config = {
     // will be called from there.
     //
     specs: [
-        './specs/tests/**/*.ts'
+        './webdriverIO/tests/**/*.ts'
     ],
     suites: {
         requestModification: [
-            './specs/tests/request-modification.ts'
+            './webdriverIO/tests/request-modification.ts'
         ],
         requestValidation: [
-            './specs/tests/request-validation.ts'
+            './webdriverIO/tests/request-validation.ts'
         ],
         responseModification: [
-            './specs/tests/response-modification.ts'
+            './webdriverIO/tests/response-modification.ts'
         ],
         responseValidation: [
-            './specs/tests/response-validation.ts'
+            './webdriverIO/tests/response-validation.ts'
         ],
     },
     // Patterns to exclude.

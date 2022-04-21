@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx wdio run wdio.conf.ts",
-    "test:requestModification": "npx wdio run wdio.conf.ts --suite requestModification",
-    "test:requestValidation": "npx wdio run wdio.conf.ts --suite requestValidation",
-    "test:responseModification": "npx wdio run wdio.conf.ts --suite responseModification",
-    "test:responseValidation": "npx wdio run wdio.conf.ts --suite responseValidation"
+    "test:webdriverio:all": "npx wdio run wdio.conf.ts",
+    "test:webdriverio:requestValidation": "npx wdio run wdio.conf.ts --suite requestValidation",
+    "test:webdriverio:responseModification": "npx wdio run wdio.conf.ts --suite responseModification",
+    "test:webdriverio:responseValidation": "npx wdio run wdio.conf.ts --suite responseValidation"
   },
   "author": "",
   "license": "ISC",
