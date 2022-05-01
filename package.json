@@ -1,0 +1,27 @@
+{
+  "name": "evaluation-request-interception",
+  "version": "1.0.0",
+  "description": "Idea Pool TA tool evaluation project - Request interception for UI testing",
+  "main": "index.js",
+  "scripts": {
+    "test:all": "npx playwright test",
+    "test:responsemodification": "npx playwright test esponsemodification.spec.ts",
+    "test:responsevalidation": "npx playwright test responsevalidation.spec.ts",
+    "test:requestmodification": "npx playwright test requestmodification.spec.ts",
+    "test:requestvalidation": "npx playwright test requestvalidation.spec.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Idea-Pool/evaluation-request-interception.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Idea-Pool/evaluation-request-interception/issues"
+  },
+  "homepage": "https://github.com/Idea-Pool/evaluation-request-interception#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.21.1"
+  }
+}
