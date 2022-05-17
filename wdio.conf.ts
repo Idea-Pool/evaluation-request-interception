@@ -51,9 +51,6 @@ export const config: WebdriverIO.Config = {
         './webdriverIO/tests/**/*.ts'
     ],
     suites: {
-        requestModification: [
-            './webdriverIO/tests/request-modification.ts'
-        ],
         requestValidation: [
             './webdriverIO/tests/request-validation.ts'
         ],

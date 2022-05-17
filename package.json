@@ -9,7 +9,7 @@
     "test:webdriverio:responseModification": "npx wdio run wdio.conf.ts --suite responseModification",
     "test:webdriverio:responseValidation": "npx wdio run wdio.conf.ts --suite responseValidation"
   },
-  "author": "",
+  "author": "Tamas Szucs",
   "license": "ISC",
   "dependencies": {
     "@wdio/cli": "^7.16.13",
@@ -24,7 +24,7 @@
     "chromedriver": "^99.0.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4",
-    "wdio-chromedriver-service": "^7.2.6",
+    "wdio-chromedriver-service": "^7.3.2",
     "wdio-intercept-service": "^4.2.1",
     "wdio-wait-for": "^2.2.1"
   }
