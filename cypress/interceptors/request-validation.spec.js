@@ -1,10 +1,11 @@
-const testData = require('../fixtures/data.json');
+const { baseUrl } = require('../fixtures/config.json');
+const { selectors, requestUrl } = require('../fixtures/test-data.json');
 
 describe('Request Validation', () => {
   beforeEach(() => {
-    cy.visit(testData.baseUrl);
+    cy.visit(baseUrl);
     cy.intercept('GET', '/api/users?page=2').as('usersRequest');
-    cy.get(testData.selectors.users).click();
+    cy.get(selectors.users).click();
   });
 
   describe('Request verification', () => {
@@ -13,9 +14,7 @@ describe('Request Validation', () => {
     });
 
     it('should have the correct URL', () => {
-      cy.wait('@usersRequest')
-        .its('request.url')
-        .should('equal', testData.requestUrl);
+      cy.wait('@usersRequest').its('request.url').should('equal', requestUrl);
     });
   });
 });

@@ -1,5 +1,5 @@
 const { versionSchemas, combineSchemas } = require('@cypress/schema-tools');
-const testData = require('./data.json');
+const { expectedUsersBody } = require('./response-bodies.json');
 
 const responseUsersBody = {
   version: {
@@ -173,7 +173,7 @@ const responseUsersBody = {
       required: ['page', 'per_page', 'total', 'total_pages', 'data', 'support'],
     },
   },
-  example: testData.expectedUsersBody,
+  example: expectedUsersBody,
 };
 
 const bodyVersions = versionSchemas(responseUsersBody);

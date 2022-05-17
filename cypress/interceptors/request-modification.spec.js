@@ -1,14 +1,21 @@
-const testData = require('../fixtures/data.json');
+const { baseUrl } = require('../fixtures/config.json');
+const {
+  modifiedUrl,
+  selectors,
+  modifiedRequestHeaderProperty,
+  modifiedRequestHeaderPropertyValue,
+} = require('../fixtures/test-data.json');
 
 describe('Request Modification', () => {
   beforeEach(() => {
-    cy.visit(testData.baseUrl);
+    cy.visit(baseUrl);
     cy.intercept('GET', '/api/users?page=2', (req) => {
-      req.url = testData.modifiedUrl;
-      req.headers[testData.modifiedRequestHeaderProperty] =
-        testData.modifiedRequestHeaderPropertyValue;
+      //modify request
+      req.url = modifiedUrl;
+      req.headers[modifiedRequestHeaderProperty] =
+        modifiedRequestHeaderPropertyValue;
     }).as('usersRequest');
-    cy.get(testData.selectors.users).click();
+    cy.get(selectors.users).click();
   });
 
   describe('Modified request verification', () => {
@@ -17,9 +24,7 @@ describe('Request Modification', () => {
     });
 
     it('should have the modified URL', () => {
-      cy.wait('@usersRequest')
-        .its('request.url')
-        .should('equal', testData.modifiedUrl);
+      cy.wait('@usersRequest').its('request.url').should('equal', modifiedUrl);
     });
 
     it('should have an additional header property', () => {
@@ -27,8 +32,8 @@ describe('Request Modification', () => {
         .its('request.headers')
         .should(
           'have.property',
-          testData.modifiedRequestHeaderProperty,
-          testData.modifiedRequestHeaderPropertyValue
+          modifiedRequestHeaderProperty,
+          modifiedRequestHeaderPropertyValue
         );
     });
   });
