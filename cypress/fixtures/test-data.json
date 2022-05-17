@@ -1,4 +1,5 @@
 {
+  "baseUrl": "https://reqres.in/",
   "requestUrl": "https://reqres.in/api/users?page=2",
   "modifiedUrl": "https://reqres.in/api/users?page=3",
   "modifiedRequestHeaderProperty": "modified-header-property",

@@ -1,4 +1,3 @@
-const { baseUrl } = require('../fixtures/config.json');
 const {
   modifiedUrl,
   selectors,
@@ -8,7 +7,7 @@ const {
 
 describe('Request Modification', () => {
   beforeEach(() => {
-    cy.visit(baseUrl);
+    cy.visit('/');
     cy.intercept('GET', '/api/users?page=2', (req) => {
       //modify request
       req.url = modifiedUrl;

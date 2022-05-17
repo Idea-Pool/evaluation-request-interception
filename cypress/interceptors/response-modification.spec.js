@@ -1,5 +1,4 @@
 const { assertSchema } = require('@cypress/schema-tools');
-const { baseUrl } = require('../fixtures/config.json');
 const {
   selectors,
   modifiedResponseCode,
@@ -14,7 +13,7 @@ describe('Response Modification', () => {
   let usersResponse;
 
   beforeEach(() => {
-    cy.visit(baseUrl);
+    cy.visit('/');
     cy.intercept('GET', '/api/users?page=2', (req) => {
       req.continue((res) => {
         //modify response values

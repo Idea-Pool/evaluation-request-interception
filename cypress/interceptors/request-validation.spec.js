@@ -1,9 +1,8 @@
-const { baseUrl } = require('../fixtures/config.json');
 const { selectors, requestUrl } = require('../fixtures/test-data.json');
 
 describe('Request Validation', () => {
   beforeEach(() => {
-    cy.visit(baseUrl);
+    cy.visit('/');
     cy.intercept('GET', '/api/users?page=2').as('usersRequest');
     cy.get(selectors.users).click();
   });

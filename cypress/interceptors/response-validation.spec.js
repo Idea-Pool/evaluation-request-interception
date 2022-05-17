@@ -1,6 +1,6 @@
 const { assertSchema } = require('@cypress/schema-tools');
-const { baseUrl } = require('../fixtures/config.json');
 const {
+  baseUrl,
   selectors,
   expectedResponseCode,
   expectedStatusMessage,
@@ -12,7 +12,7 @@ describe('Response Validation', () => {
   let usersResponse;
 
   beforeEach(() => {
-    cy.visit(baseUrl);
+    cy.visit('/');
     cy.intercept('GET', '/api/users?page=2').as('usersRequest');
     cy.get(selectors.users).click();
     cy.wait('@usersRequest').then(({ response }) => {

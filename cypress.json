@@ -1,5 +1,7 @@
 {
+  "baseUrl": "https://reqres.in/",
   "chromeWebSecurity": false,
   "defaultCommandTimeout": 10000,
-  "integrationFolder": "./cypress/interceptors"
+  "integrationFolder": "./cypress/interceptors",
+  "video": false
 }
