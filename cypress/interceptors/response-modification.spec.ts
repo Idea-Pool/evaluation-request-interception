@@ -5,9 +5,10 @@ import {
   modifiedPartialUsersBody,
 } from '../fixtures/response-bodies.json';
 import { schemas } from '../fixtures/response-schema';
+import { CyHttpMessages } from 'cypress/types/net-stubbing';
 
 describe('Response Modification', () => {
-  let usersResponse;
+  let usersResponse: CyHttpMessages.IncomingResponse;
 
   beforeEach(() => {
     cy.visit('/');
