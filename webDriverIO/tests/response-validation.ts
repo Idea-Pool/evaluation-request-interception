@@ -1,11 +1,18 @@
 import { multipleUsersSchema } from '../data/list-users-schema';
 import { validate, ValidatorResult } from 'jsonschema';
-const users = require('../data/users.json');
 import { expect } from 'chai';
+
+const {
+    expectedURL,
+    expectedResponseStatusCode,
+    expectedRequestMethod,
+    usersSelector
+} = require('../data/test-data.json');
+const users = require('../data/users.json');
 
 describe('Response validation', () => {
     before(async () => {
-        await browser.url('https://reqres.in/');
+        await browser.url('/');
     });
 
     describe('Response verification', () => {
@@ -13,19 +20,19 @@ describe('Response validation', () => {
         let request;
 
         before(async () => {
-            getUsers = $('[data-id="users"]');
+            getUsers = $(`${ usersSelector }`);
             browser.setupInterceptor();
             await getUsers.click();
         });
 
         it('should return only the required one request', async () => {
-            await browser.expectRequest('GET', '/api/users?page=2', 200);
+            await browser.expectRequest(expectedRequestMethod, expectedURL, expectedResponseStatusCode);
             await browser.assertExpectedRequestsOnly();
         });
 
         it('should return 200 status code', async () => {
             request = await browser.getRequest(0);
-            expect(request.response.statusCode).to.equal(200);
+            expect(request.response.statusCode).to.equal(expectedResponseStatusCode);
         });
 
         describe('The response body', () => {
@@ -48,12 +55,12 @@ describe('Response validation', () => {
     });
 
     it('should return the response under 1 second', async () => {
-        const getUsers = $('[data-id="users"]');
+        const getUsers = $(`${ usersSelector }`);
         browser.setupInterceptor();
 
         const startTime = new Date().getTime();
         await getUsers.click();
-        await browser.expectRequest('GET', '/api/users?page=2', 200);
+        await browser.expectRequest(expectedRequestMethod, expectedURL, expectedResponseStatusCode);
         await browser.assertExpectedRequestsOnly();
         await browser.getRequest(0);
         const endTime = new Date().getTime()
