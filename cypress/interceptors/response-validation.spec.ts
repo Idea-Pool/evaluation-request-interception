@@ -56,11 +56,7 @@ describe('Response Validation', () => {
 
   it('The number of responses should be 1', () => {
     // CYPRESS only waits for the first matching request.
-    cy.get(selectors.users).click();
-    cy.get(selectors.users).click();
-    cy.wait('@usersRequest').wait('@usersRequest');
-
-    cy.get('@usersRequest.all').should('have.length', 3);
+    cy.get('@usersRequest.all').should('have.length', 1);
   });
 
   it('The response duration should not be longer than 1s', () => {
