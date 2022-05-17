@@ -1,9 +1,9 @@
-const {
-  modifiedUrl,
+import {
   selectors,
+  modifiedUrl,
   modifiedRequestHeaderProperty,
   modifiedRequestHeaderPropertyValue,
-} = require('../fixtures/test-data.json');
+} from '../fixtures/test-data.json';
 
 describe('Request Modification', () => {
   beforeEach(() => {

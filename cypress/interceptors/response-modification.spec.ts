@@ -1,13 +1,10 @@
-const { assertSchema } = require('@cypress/schema-tools');
-const {
-  selectors,
-  modifiedResponseCode,
-} = require('../fixtures/test-data.json');
-const {
+import { assertSchema } from '@cypress/schema-tools';
+import { selectors, modifiedResponseCode } from '../fixtures/test-data.json';
+import {
   modifiedUsersBody,
   modifiedPartialUsersBody,
-} = require('../fixtures/response-bodies.json');
-const { schemas } = require('../fixtures/response-schema.js');
+} from '../fixtures/response-bodies.json';
+import { schemas } from '../fixtures/response-schema';
 
 describe('Response Modification', () => {
   let usersResponse;

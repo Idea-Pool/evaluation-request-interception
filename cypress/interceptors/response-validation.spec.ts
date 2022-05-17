@@ -1,15 +1,19 @@
-const { assertSchema } = require('@cypress/schema-tools');
-const {
-  baseUrl,
+import { assertSchema } from '@cypress/schema-tools';
+import {
   selectors,
+  baseUrl,
   expectedResponseCode,
   expectedStatusMessage,
-} = require('../fixtures/test-data.json');
-const responseBody = require('../fixtures/response-bodies.json');
-const { schemas } = require('../fixtures/response-schema.js');
+} from '../fixtures/test-data.json';
+import {
+  expectedUsersBody,
+  partialUsersBody,
+} from '../fixtures/response-bodies.json';
+import { schemas } from '../fixtures/response-schema';
+import { CyHttpMessages } from 'cypress/types/net-stubbing';
 
 describe('Response Validation', () => {
-  let usersResponse;
+  let usersResponse: CyHttpMessages.IncomingResponse;
 
   beforeEach(() => {
     cy.visit('/');
@@ -33,17 +37,13 @@ describe('Response Validation', () => {
       expect(usersResponse.statusMessage).to.equal(expectedStatusMessage);
     });
 
-    describe('The response body', () => {
+    describe.only('The response body', () => {
       it('should match exactly', () => {
-        expect(usersResponse.body).to.deep.equal(
-          responseBody.expectedUsersBody
-        );
+        expect(usersResponse.body).to.deep.equal(expectedUsersBody);
       });
 
       it('should match partially', () => {
-        expect(usersResponse.body).to.deep.contain(
-          responseBody.partialUsersBody
-        );
+        expect(usersResponse.body).to.deep.contain(partialUsersBody);
       });
 
       it('should match the schema', () => {

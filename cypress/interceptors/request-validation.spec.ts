@@ -1,4 +1,4 @@
-const { selectors, requestUrl } = require('../fixtures/test-data.json');
+import { selectors, requestUrl } from '../fixtures/test-data.json';
 
 describe('Request Validation', () => {
   beforeEach(() => {
