@@ -1,13 +1,12 @@
 import { multipleUsersSchema } from '../data/list-users-schema';
 import { validate, ValidatorResult } from 'jsonschema';
 import { expect } from 'chai';
-
-const {
-    expectedURL,
-    expectedResponseStatusCode,
+import {
     expectedRequestMethod,
-    usersSelector
-} = require('../data/test-data.json');
+    expectedResponseStatusCode,
+    expectedURL, usersSelector
+} from '../data/test-data.json';
+
 const users = require('../data/users.json');
 
 describe('Response validation', () => {
@@ -26,7 +25,7 @@ describe('Response validation', () => {
         });
 
         it('should return only the required one request', async () => {
-            await browser.expectRequest(expectedRequestMethod, expectedURL, expectedResponseStatusCode);
+            await browser.expectRequest(<WdioInterceptorService.HTTPMethod>expectedRequestMethod, expectedURL, expectedResponseStatusCode);
             await browser.assertExpectedRequestsOnly();
         });
 
@@ -60,7 +59,7 @@ describe('Response validation', () => {
 
         const startTime = new Date().getTime();
         await getUsers.click();
-        await browser.expectRequest(expectedRequestMethod, expectedURL, expectedResponseStatusCode);
+        await browser.expectRequest(<WdioInterceptorService.HTTPMethod>expectedRequestMethod, expectedURL, expectedResponseStatusCode);
         await browser.assertExpectedRequestsOnly();
         await browser.getRequest(0);
         const endTime = new Date().getTime()

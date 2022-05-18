@@ -1,14 +1,14 @@
 import { multipleUsersSchema } from '../data/list-users-schema';
 import { validate, ValidatorResult } from 'jsonschema';
 import { expect } from 'chai';
-
-const {
-    expectedURL,
-    expectedResponseStatusCode,
+import {
     expectedRequestMethod,
+    expectedResponseStatusCode,
+    expectedURL,
     modifiedResponseStatusCode,
     usersSelector
-} = require('../data/test-data.json');
+} from '../data/test-data.json';
+
 const users = require('../data/users.json');
 
 describe('Response modification', () => {
@@ -26,7 +26,7 @@ describe('Response modification', () => {
         });
 
         it('should return only the required one request', async () => {
-            await browser.expectRequest(expectedRequestMethod, expectedURL, expectedResponseStatusCode);
+            await browser.expectRequest(<WdioInterceptorService.HTTPMethod>expectedRequestMethod, expectedURL, expectedResponseStatusCode);
             await browser.assertExpectedRequestsOnly();
         });
 
@@ -38,7 +38,7 @@ describe('Response modification', () => {
 
         describe('The modified response body', () => {
             it('should return the appropriate full body schema', async () => {
-                const request = await browser.getRequest(0);
+                request = await browser.getRequest(0);
                 const validation: ValidatorResult = validate(request.response.body, multipleUsersSchema);
                 expect(validation.valid).to.equal(true);
             });

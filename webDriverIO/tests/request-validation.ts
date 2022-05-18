@@ -1,11 +1,10 @@
 import { expect } from 'chai';
-
-const {
-    expectedURL,
-    expectedResponseStatusCode,
+import {
     expectedRequestMethod,
+    expectedResponseStatusCode,
+    expectedURL,
     usersSelector
-} = require('../data/test-data.json');
+} from '../data/test-data.json';
 
 describe('Request validation', () => {
     before(async () => {
@@ -20,7 +19,7 @@ describe('Request validation', () => {
         });
 
         it('should return only the required one request', async () => {
-            await browser.expectRequest(expectedRequestMethod, expectedURL, expectedResponseStatusCode);
+            await browser.expectRequest(<WdioInterceptorService.HTTPMethod>expectedRequestMethod, expectedURL, expectedResponseStatusCode);
             await browser.assertExpectedRequestsOnly();
         });
 
@@ -31,7 +30,7 @@ describe('Request validation', () => {
 
         it('should match the URL', async () => {
             const request = await browser.getRequest(0);
-            expect(request.url).to.contain(`${ expectedURL }`);
+            expect(request.url).to.contain(expectedURL);
         });
     });
 });
