@@ -1,0 +1,7 @@
+{
+  "expectedURL": "/api/users?page=2",
+  "expectedResponseStatusCode": 200,
+  "expectedRequestMethod": "GET",
+  "modifiedResponseStatusCode": 202,
+  "usersSelector": "[data-id='users']"
+}
