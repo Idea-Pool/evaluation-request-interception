@@ -4,8 +4,7 @@ test.describe('request validation', () => {
     let request;
 
     test.beforeEach(async ({page}) => {
-        await page.goto("https://reqres.in");
-        await page.setViewportSize({width: 1920, height: 1080});
+        await page.goto("");
 
         page.click("[data-id = \"users\"]");
         request = await page.waitForRequest(request => request.url().includes('users?page=2'));

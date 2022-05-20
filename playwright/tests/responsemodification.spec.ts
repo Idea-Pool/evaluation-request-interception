@@ -7,8 +7,7 @@ test.describe('response modification', () => {
     let responseBody;
 
     test.beforeEach(async ({page}) => {
-        await page.goto("https://reqres.in");
-        await page.setViewportSize({width: 1920, height: 1080});
+        await page.goto("");
 
         await page.route('**/users?page=2', route => route.fulfill({
             status: 404,

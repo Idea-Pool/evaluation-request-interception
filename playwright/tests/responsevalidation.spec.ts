@@ -1,14 +1,13 @@
 import {test, expect} from '@playwright/test';
 import {partialBody} from '../data/response-body';
-const fullBody = require('../data/users')
+import {fullBody} from '../data/users';
 
 test.describe('response validation', async () => {
   let response
   let responseBody
 
   test.beforeEach(async ({page}) => {
-    await page.goto("https://reqres.in");
-    await page.setViewportSize({width: 1920, height: 1080})
+    await page.goto("");
 
     page.click("[data-id = \"users\"]");
     response = await page.waitForResponse(response => response.url().includes('users?page=2'));
