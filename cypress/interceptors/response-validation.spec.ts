@@ -37,7 +37,7 @@ describe('Response Validation', () => {
       expect(usersResponse.statusMessage).to.equal(expectedStatusMessage);
     });
 
-    describe.only('The response body', () => {
+    describe('The response body', () => {
       it('should match exactly', () => {
         expect(usersResponse.body).to.deep.equal(expectedUsersBody);
       });
