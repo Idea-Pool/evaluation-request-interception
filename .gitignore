@@ -108,3 +108,6 @@ cypress/videos/
 cypress/support/
 cypress/plugins/
 cypress/screenshots/
+
+# Idea files
+.idea/
