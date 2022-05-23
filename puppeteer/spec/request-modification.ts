@@ -1,41 +1,40 @@
-const puppeteer = require("puppeteer");
-const userListSelector = "[data-id='users']";
-const {
+import * as puppeteer from 'puppeteer';
+import {USER_LIST_SELECTOR} from "../data/selectors.json";
+import  {
   BASE_URL,
-  USER_LIST_PATH,
   SINGLE_USER_PATH,
-} = require("../data/constants.json");
-const chai = require("chai");
-const chaiAsPromised = require("chai-as-promised");
-const chaiDeepMatch = require("chai-deep-match");
-const expect = chai.expect;
-const expectedResponse = require("../data/response.json");
-chai.use(chaiAsPromised);
-chai.use(chaiDeepMatch);
-chai.use(require("chai-json-schema"));
+  USER_LIST_URL,
+  MODIFIED_HEADER
+} from "../data/constants.json";
+
+import * as expectedResponse from "../data/response.json";
+
 
 describe("Request Modification", () => {
   let browser, page, interceptedRequest;
+
   before(async function () {
     browser = await puppeteer.launch();
   });
+
   beforeEach(async () => {
     page = await browser.newPage();
     await page.setCacheEnabled(false);
     await page.goto(BASE_URL);
     await page.setRequestInterception(true);
   });
+
   describe("Modified request verification", () => {
     it("should be a GET method", async () => {
       page.on("request", (request) => {
-        if (request.url() === `${BASE_URL}${USER_LIST_PATH}`) {
+        if (request.url() === USER_LIST_URL) {
           interceptedRequest = request;
         }
         request.continue();
       });
-      page.click(userListSelector);
+      page.click(USER_LIST_SELECTOR);
       await page.waitForResponse(
-        (response) => response.url() === `${BASE_URL}${USER_LIST_PATH}`
+        (response) => response.url() === USER_LIST_URL
       );
       expect(interceptedRequest.method()).to.be.equal("GET");
     });
@@ -45,7 +44,7 @@ describe("Request Modification", () => {
       const cdpSession = await page.target().createCDPSession();
       await cdpSession.send("Network.enable");
       await cdpSession.on("Network.requestWillBeSent", (requestInfo) => {
-        if (requestInfo.request.url === `${BASE_URL}${USER_LIST_PATH}`) {
+        if (requestInfo.request.url === USER_LIST_URL) {
           interceptedRequestId = requestInfo.requestId;
         }
       });
@@ -59,16 +58,16 @@ describe("Request Modification", () => {
       );
 
       page.on("request", (request) => {
-        if (request.url() === `${BASE_URL}${USER_LIST_PATH}`) {
+        if (request.url() === USER_LIST_URL) {
           interceptedRequest = request;
           request.continue({ url: "https://reqres.in/api/users/2" });
           return;
         }
         request.continue();
       });
-      page.click(userListSelector);
+      page.click(USER_LIST_SELECTOR);
       await page.waitForResponse(
-        (response) => response.url() === `${BASE_URL}${USER_LIST_PATH}`
+        (response) => response.url() === USER_LIST_URL
       );
       expect(interceptedRequest.response().json()).to.be.eventually.deep.equal(
         expectedResponse.singleUserResponseBody
@@ -79,21 +78,22 @@ describe("Request Modification", () => {
 
     it("should have an additional property", async () => {
       page.on("request", (request) => {
-        if (request.url() === `${BASE_URL}${USER_LIST_PATH}`) {
+        if (request.url() === USER_LIST_URL) {
           interceptedRequest = request;
           const headers = request.headers();
-          headers.Sanyi = "Sanyi";
+          headers[MODIFIED_HEADER] = MODIFIED_HEADER;
           request.continue({ headers });
         }
         request.continue();
       });
-      page.click(userListSelector);
+      page.click(USER_LIST_SELECTOR);
       await page.waitForResponse(
-        (response) => response.url() === `${BASE_URL}${USER_LIST_PATH}`
+        (response) => response.url() === USER_LIST_URL
       );
-      return expect(interceptedRequest.headers()).to.haveOwnProperty("Sanyi");
+      return expect(interceptedRequest.headers()).to.haveOwnProperty(MODIFIED_HEADER);
     });
   });
+  
   afterEach(async () => {
     await page.close();
   });

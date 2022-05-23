@@ -1,10 +1,6 @@
 const puppeteer = require("puppeteer");
-const userListSelector = "[data-id='users']";
-const { BASE_URL, USER_LIST_PATH } = require("../data/constants.json");
-const chai = require("chai");
-const chaiAsPromised = require("chai-as-promised");
-const chaiDeepMatch = require("chai-deep-match");
-const expect = chai.expect;
+const {USER_LIST_SELECTOR} = require("../data/selectors.json");
+const { BASE_URL,USER_LIST_URL } = require("../data/constants.json");
 const { StatusCodes } = require("http-status-codes");
 const {
   userListResponseBody,
@@ -12,34 +8,33 @@ const {
   maxResponseTime,
 } = require("../data/response.json");
 const expectedSchema = require("../data/json-schema.json");
-chai.use(chaiAsPromised);
-chai.use(chaiDeepMatch);
-chai.use(require("chai-json-schema"));
 
 describe("Response Validation", () => {
+  
   let browser,
     page,
     interceptedRequests = [],
     performanceData;
+
   before(async function () {
     browser = await puppeteer.launch();
     page = await browser.newPage();
-    await page.goto("https://reqres.in/");
+    await page.goto(BASE_URL);
     await page.setRequestInterception(true);
     page.on("request", (request) => {
-      if (request.url() === `${BASE_URL}${USER_LIST_PATH}`) {
+      if (request.url() === USER_LIST_URL) {
         interceptedRequests.push(request);
       }
       request.continue();
     });
-    page.click(userListSelector);
+    page.click(USER_LIST_SELECTOR);
     await page.waitForResponse(
-      (response) => response.url() === `${BASE_URL}${USER_LIST_PATH}`
+      (response) => response.url() === USER_LIST_URL
     );
 
     performanceData = await page.evaluate(
       (name) => performance.getEntriesByName(name)[1].toJSON(),
-      `${BASE_URL}${USER_LIST_PATH}`
+      USER_LIST_URL
     );
   });
 

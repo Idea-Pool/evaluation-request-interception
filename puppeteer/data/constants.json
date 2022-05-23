@@ -1,5 +1,7 @@
 {
     "BASE_URL":"https://reqres.in/",
     "USER_LIST_PATH":"api/users?page=2",
-    "SINGLE_USER_PATH":"/api/users/2"
+    "SINGLE_USER_PATH":"/api/users/2",
+    "USER_LIST_URL":"https://reqres.in/api/users?page=2",
+    "MODIFIED_HEADER":"IDEA_POOL_HEADER"
 }
