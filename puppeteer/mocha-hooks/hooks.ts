@@ -1,14 +1,13 @@
-import * as chai from 'chai';
-import * as chaiAsPromised from'chai-as-promised';
-import * as chaiDeepMatch from 'chai-deep-match';
+import * as chai from "chai";
+import * as chaiAsPromised from "chai-as-promised";
 
-export const mochaHooks = {
-  beforeAll(done) {
-    global.expect = chai.expect;
-    chai.use(chaiAsPromised);
-    chai.use(chaiDeepMatch);
-    chai.use(require("chai-json-schema"));
-
-    done();
-  },
+export const mochaHooks = (): Mocha.RootHookObject => {
+  return {
+    beforeAll() {
+      chai.use(chaiAsPromised);
+      chai.use(require("chai-subset"));
+      chai.use(require("chai-json-schema"));
+    
+    },
+  };
 };

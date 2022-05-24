@@ -1,20 +1,19 @@
-const puppeteer = require("puppeteer");
-const {USER_LIST_SELECTOR} = require("../data/selectors.json");
-const { BASE_URL,USER_LIST_URL } = require("../data/constants.json");
-const { StatusCodes } = require("http-status-codes");
-const {
+import * as puppeteer from "puppeteer";
+import { USER_LIST_SELECTOR } from "../data/selectors.json";
+import { BASE_URL, USER_LIST_URL } from "../data/constants.json";
+import { StatusCodes } from "http-status-codes";
+import {
   userListResponseBody,
   singleUserResponseBody,
   maxResponseTime,
-} = require("../data/response.json");
-const expectedSchema = require("../data/json-schema.json");
+} from "../data/response.json";
+import * as expectedSchema from "../data/json-schema.json";
 
 describe("Response Validation", () => {
-  
-  let browser,
-    page,
-    interceptedRequests = [],
-    performanceData;
+  let browser: puppeteer.Browser,
+    page: puppeteer.Page,
+    interceptedRequests: puppeteer.HTTPRequest[] = [],
+    performanceData: any;
 
   before(async function () {
     browser = await puppeteer.launch();
@@ -28,9 +27,7 @@ describe("Response Validation", () => {
       request.continue();
     });
     page.click(USER_LIST_SELECTOR);
-    await page.waitForResponse(
-      (response) => response.url() === USER_LIST_URL
-    );
+    await page.waitForResponse((response) => response.url() === USER_LIST_URL);
 
     performanceData = await page.evaluate(
       (name) => performance.getEntriesByName(name)[1].toJSON(),
@@ -50,10 +47,10 @@ describe("Response Validation", () => {
           interceptedRequests[0].response().json()
         ).to.be.eventually.deep.equal(userListResponseBody));
 
-      it("should match partially", () =>
-        expect(
-          interceptedRequests[0].response().json()
-        ).to.eventually.deep.match(singleUserResponseBody.data));
+      it("should match partially", async () =>
+        expect(await interceptedRequests[0].response().json()).to.containSubset(
+          singleUserResponseBody.data
+        ));
 
       it("should match the schema", async () =>
         expect(await interceptedRequests[0].response().json()).to.be.jsonSchema(

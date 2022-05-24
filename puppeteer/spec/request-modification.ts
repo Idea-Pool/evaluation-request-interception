@@ -11,7 +11,7 @@ import * as expectedResponse from "../data/response.json";
 
 
 describe("Request Modification", () => {
-  let browser, page, interceptedRequest;
+  let browser:puppeteer.Browser, page:puppeteer.Page, interceptedRequest:puppeteer.HTTPRequest;
 
   before(async function () {
     browser = await puppeteer.launch();
@@ -40,7 +40,7 @@ describe("Request Modification", () => {
     });
 
     it("should have the modified URL", async () => {
-      let interceptedRequestId, interceptedRequestPath;
+      let interceptedRequestId:string, interceptedRequestPath:string;
       const cdpSession = await page.target().createCDPSession();
       await cdpSession.send("Network.enable");
       await cdpSession.on("Network.requestWillBeSent", (requestInfo) => {

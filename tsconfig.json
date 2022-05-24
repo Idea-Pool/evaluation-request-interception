@@ -1,9 +1,15 @@
 {
-    "compilerOptions": {
-      "types": [
-        "mocha"
-      ],
-      "target": "ES5",
-      "resolveJsonModule": true
-    }
+  "compilerOptions": {
+    "types": [
+      "mocha",
+      "node",
+      "chai",
+      "chai-json-schema",
+      "chai-as-promised",
+      "chai-subset"
+    ],
+    "moduleResolution": "node",
+    "target": "ES2018",
+    "resolveJsonModule": true
+  }
 }

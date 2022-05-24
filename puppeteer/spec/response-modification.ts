@@ -1,11 +1,11 @@
-const puppeteer = require("puppeteer");
-const {USER_LIST_SELECTOR} = require("../data/selectors.json");
-const { BASE_URL,USER_LIST_URL } = require("../data/constants.json");
-const mockResponseSchema = require("../schemas/mock.json");
-const { mockResponse } = require("../data/response.json");
+import * as puppeteer from "puppeteer";
+import { USER_LIST_SELECTOR } from "../data/selectors.json";
+import { BASE_URL, USER_LIST_URL } from "../data/constants.json";
+import * as mockResponseSchema  from "../schemas/mock.json";
+import { mockResponse } from "../data/response.json";
 
 describe("Response Modification", () => {
-  let browser, page, interceptedRequest;
+  let browser:puppeteer.Browser, page:puppeteer.Page, interceptedRequest:puppeteer.HTTPRequest;
 
   before(async function () {
     browser = await puppeteer.launch();
@@ -53,9 +53,9 @@ describe("Response Modification", () => {
         ).to.eventually.be.deep.equal(mockResponse.body);
       });
 
-      it("should match partially", () =>
-        expect(interceptedRequest.response().json()).to.eventually.deep.match(
-          mockResponse.body.id
+      it("should match partially", async () =>
+        expect(await interceptedRequest.response().json()).to.containSubset(
+          {id:mockResponse.body.id}
         ));
 
       it("should match the schema", async () =>
