@@ -48,7 +48,7 @@ describe('Response Validation', () => {
 
       it('should match the schema', () => {
         expect(() =>
-          assertSchema(schemas)('Response Body', '1.0.0')(usersResponse.body)
+          assertSchema(schemas)('Response Body', '1.0.0')(usersResponse.body),
         ).to.not.throw();
       });
     });

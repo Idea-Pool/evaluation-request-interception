@@ -9,7 +9,7 @@ describe('Request Modification', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.intercept('GET', '/api/users?page=2', (req) => {
-      //modify request
+      // modify request
       req.url = modifiedUrl;
       req.headers[modifiedRequestHeaderProperty] =
         modifiedRequestHeaderPropertyValue;
@@ -32,7 +32,7 @@ describe('Request Modification', () => {
         .should(
           'have.property',
           modifiedRequestHeaderProperty,
-          modifiedRequestHeaderPropertyValue
+          modifiedRequestHeaderPropertyValue,
         );
     });
   });

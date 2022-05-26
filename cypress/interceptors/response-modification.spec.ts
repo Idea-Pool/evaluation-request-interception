@@ -14,7 +14,7 @@ describe('Response Modification', () => {
     cy.visit('/');
     cy.intercept('GET', '/api/users?page=2', (req) => {
       req.continue((res) => {
-        //modify response values
+        // modify response values
         res.statusCode = modifiedResponseCode;
         res.body = modifiedUsersBody;
       });
@@ -41,7 +41,7 @@ describe('Response Modification', () => {
 
       it('should match the schema', () => {
         expect(() =>
-          assertSchema(schemas)('Response Body', '1.0.0')(usersResponse.body)
+          assertSchema(schemas)('Response Body', '1.0.0')(usersResponse.body),
         ).to.not.throw();
       });
     });
