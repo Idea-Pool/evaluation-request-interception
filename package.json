@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test:all": "npx playwright test",
-    "test:responsemodification": "npx playwright test esponsemodification.spec.ts",
+    "test:responsemodification": "npx playwright test responsemodification.spec.ts",
     "test:responsevalidation": "npx playwright test responsevalidation.spec.ts",
-    "test:requestmodification": "npx playwright test requestmodification.spec.ts",
     "test:requestvalidation": "npx playwright test requestvalidation.spec.ts"
   },
   "repository": {
