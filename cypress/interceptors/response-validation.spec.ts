@@ -1,14 +1,6 @@
 import { assertSchema } from '@cypress/schema-tools';
-import {
-  selectors,
-  baseUrl,
-  expectedResponseCode,
-  expectedStatusMessage,
-} from '../fixtures/test-data.json';
-import {
-  expectedUsersBody,
-  partialUsersBody,
-} from '../fixtures/response-bodies.json';
+import { selectors, baseUrl, expectedResponseCode, expectedStatusMessage } from '../fixtures/test-data.json';
+import { expectedUsersBody, partialUsersBody } from '../fixtures/response-bodies.json';
 import { schemas } from '../fixtures/response-schema';
 import { CyHttpMessages } from 'cypress/types/net-stubbing';
 
@@ -47,9 +39,7 @@ describe('Response Validation', () => {
       });
 
       it('should match the schema', () => {
-        expect(() =>
-          assertSchema(schemas)('Response Body', '1.0.0')(usersResponse.body),
-        ).to.not.throw();
+        expect(() => assertSchema(schemas)('Response Body', '1.0.0')(usersResponse.body)).to.not.throw();
       });
     });
   });

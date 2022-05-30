@@ -11,8 +11,7 @@ describe('Request Modification', () => {
     cy.intercept('GET', '/api/users?page=2', (req) => {
       // modify request
       req.url = modifiedUrl;
-      req.headers[modifiedRequestHeaderProperty] =
-        modifiedRequestHeaderPropertyValue;
+      req.headers[modifiedRequestHeaderProperty] = modifiedRequestHeaderPropertyValue;
     }).as('usersRequest');
     cy.get(selectors.users).click();
   });
@@ -29,11 +28,7 @@ describe('Request Modification', () => {
     it('should have an additional header property', () => {
       cy.wait('@usersRequest')
         .its('request.headers')
-        .should(
-          'have.property',
-          modifiedRequestHeaderProperty,
-          modifiedRequestHeaderPropertyValue,
-        );
+        .should('have.property', modifiedRequestHeaderProperty, modifiedRequestHeaderPropertyValue);
     });
   });
 });

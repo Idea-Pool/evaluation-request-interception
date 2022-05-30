@@ -1,12 +1,8 @@
 import { multipleUsersSchema } from '../data/list-users-schema';
 import { validate, ValidatorResult } from 'jsonschema';
 import { expect } from 'chai';
-import {
-  expectedRequestMethod,
-  expectedResponseStatusCode,
-  expectedURL,
-  usersSelector,
-} from '../data/test-data.json';
+import { expectedRequestMethod, expectedResponseStatusCode, expectedURL, usersSelector } from '../data/test-data.json';
+import WdioInterceptorService from 'wdio-intercept-service';
 
 const users = require('../data/users.json');
 
@@ -42,25 +38,18 @@ describe('Response validation', () => {
     describe('The response body', () => {
       it('should return the appropriate full body schema', async () => {
         request = await browser.getRequest(0);
-        const validation: ValidatorResult = validate(
-          request.response.body,
-          multipleUsersSchema,
-        );
+        const validation: ValidatorResult = validate(request.response.body, multipleUsersSchema);
         expect(validation.valid).to.equal(true);
       });
 
       it('should fully match the original response', async () => {
         request = await browser.getRequest(0);
-        expect(request.response.body).to.deep.equal(
-          users.originalFullUsersBody,
-        );
+        expect(request.response.body).to.deep.equal(users.originalFullUsersBody);
       });
 
       it('should partially match the original response', async () => {
         request = await browser.getRequest(0);
-        expect(request.response.body).to.deep.contain(
-          users.originalPartialUsersBody,
-        );
+        expect(request.response.body).to.deep.contain(users.originalPartialUsersBody);
       });
     });
   });

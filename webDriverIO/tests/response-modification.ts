@@ -8,6 +8,7 @@ import {
   modifiedResponseStatusCode,
   usersSelector,
 } from '../data/test-data.json';
+import WdioInterceptorService from 'wdio-intercept-service';
 
 const users = require('../data/users.json');
 
@@ -43,27 +44,20 @@ describe('Response modification', () => {
     describe('The modified response body', () => {
       it('should return the appropriate full body schema', async () => {
         request = await browser.getRequest(0);
-        const validation: ValidatorResult = validate(
-          request.response.body,
-          multipleUsersSchema,
-        );
+        const validation: ValidatorResult = validate(request.response.body, multipleUsersSchema);
         expect(validation.valid).to.equal(true);
       });
 
       it('should fully match the modified response', async () => {
         request = await browser.getRequest(0);
         request.response.body = users.modifiedFullUsersBody;
-        expect(request.response.body).to.deep.equal(
-          users.modifiedFullUsersBody,
-        );
+        expect(request.response.body).to.deep.equal(users.modifiedFullUsersBody);
       });
 
       it('should partially match the modified response', async () => {
         request = await browser.getRequest(0);
         request.response.body = users.modifiedFullUsersBody;
-        expect(request.response.body).to.deep.contain(
-          users.modifiedPartialUsersBody,
-        );
+        expect(request.response.body).to.deep.contain(users.modifiedPartialUsersBody);
       });
     });
   });

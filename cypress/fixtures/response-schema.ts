@@ -1,9 +1,4 @@
-import {
-  combineSchemas,
-  ObjectSchema,
-  SchemaCollection,
-  versionSchemas,
-} from '@cypress/schema-tools';
+import { combineSchemas, ObjectSchema, SchemaCollection, versionSchemas } from '@cypress/schema-tools';
 import { expectedUsersBody } from './response-bodies.json';
 
 const responseUsersBody: ObjectSchema = {
