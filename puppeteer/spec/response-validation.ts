@@ -1,13 +1,16 @@
 import * as puppeteer from "puppeteer";
 import { USER_LIST_SELECTOR } from "../data/selectors.json";
-import { BASE_URL, USER_LIST_URL } from "../data/constants.json";
+import {
+  BASE_URL,
+  USER_LIST_URL,
+  MAX_RESPONSE_TIME,
+} from "../data/constants.json";
 import { StatusCodes } from "http-status-codes";
 import {
   userListResponseBody,
   singleUserResponseBody,
-  maxResponseTime,
 } from "../data/response.json";
-import * as expectedSchema from "../data/json-schema.json";
+import * as userListSchema from "../schemas/user-list.json";
 
 describe("Response Validation", () => {
   let browser: puppeteer.Browser,
@@ -54,7 +57,7 @@ describe("Response Validation", () => {
 
       it("should match the schema", async () =>
         expect(await interceptedRequests[0].response().json()).to.be.jsonSchema(
-          expectedSchema
+          userListSchema
         ));
     });
   });
@@ -66,7 +69,7 @@ describe("Response Validation", () => {
   it("the response duration should not be longer than 1s", () => {
     const responseTime =
       performanceData.responseEnd - performanceData.requestStart;
-    return expect(responseTime).to.be.below(maxResponseTime);
+    return expect(responseTime).to.be.below(MAX_RESPONSE_TIME);
   });
 
   after(async () => {

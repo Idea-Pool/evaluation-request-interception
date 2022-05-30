@@ -66,7 +66,7 @@
             "text": "To keep ReqRes free, contributions towards server costs are appreciated!"
         }
     },
-    "maxResponseTime": 1000,
+    
     "mockResponse": {
         "body": {
             "id":11,
