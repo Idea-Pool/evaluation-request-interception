@@ -1,9 +1,6 @@
 import { assertSchema } from '@cypress/schema-tools';
 import { selectors, modifiedResponseCode } from '../fixtures/test-data.json';
-import {
-  modifiedUsersBody,
-  modifiedPartialUsersBody,
-} from '../fixtures/response-bodies.json';
+import { modifiedUsersBody, modifiedPartialUsersBody } from '../fixtures/response-bodies.json';
 import { schemas } from '../fixtures/response-schema';
 import { CyHttpMessages } from 'cypress/types/net-stubbing';
 
@@ -14,7 +11,7 @@ describe('Response Modification', () => {
     cy.visit('/');
     cy.intercept('GET', '/api/users?page=2', (req) => {
       req.continue((res) => {
-        //modify response values
+        // modify response values
         res.statusCode = modifiedResponseCode;
         res.body = modifiedUsersBody;
       });
@@ -40,9 +37,7 @@ describe('Response Modification', () => {
       });
 
       it('should match the schema', () => {
-        expect(() =>
-          assertSchema(schemas)('Response Body', '1.0.0')(usersResponse.body)
-        ).to.not.throw();
+        expect(() => assertSchema(schemas)('Response Body', '1.0.0')(usersResponse.body)).to.not.throw();
       });
     });
   });

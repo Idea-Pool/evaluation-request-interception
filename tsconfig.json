@@ -1,13 +1,8 @@
 {
   "compilerOptions": {
-    "types": [
-      "node",
-      "webdriverio/async",
-      "@wdio/mocha-framework",
-      "expect-webdriverio",
-      "wdio-intercept-service"
-    ],
+    "types": ["node", "webdriverio/async", "@wdio/mocha-framework", "expect-webdriverio", "wdio-intercept-service"],
     "target": "ES5",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   }
 }
