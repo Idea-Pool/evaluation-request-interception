@@ -4,6 +4,7 @@
   "description": "Idea Pool TA tool evaluation project - Request interception for UI testing",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npx playwright install",
     "test:all": "npx playwright test",
     "test:responsemodification": "npx playwright test responsemodification.spec.ts",
     "test:responsevalidation": "npx playwright test responsevalidation.spec.ts",
