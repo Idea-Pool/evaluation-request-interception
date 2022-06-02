@@ -6,8 +6,10 @@ test.describe('request validation', () => {
     test.beforeEach(async ({page}) => {
         await page.goto("");
 
-        page.click("[data-id = \"users\"]");
-        request = await page.waitForRequest(request => request.url().includes('users?page=2'));
+        [request] = await Promise.all([
+            page.waitForRequest('**/users?page=2'),
+            page.click("[data-id = \"users\"]"),
+        ]);
     });
 
     test('Should be a GET request method for listing users', () => {

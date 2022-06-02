@@ -14,8 +14,10 @@ test.describe('response modification', () => {
             body: JSON.stringify(modifiedBody),
         }));
 
-        page.click("[data-id = \"users\"]");
-        response = await page.waitForResponse(response => response.url().includes('users?page=2'));
+        [response] = await Promise.all([
+            page.waitForResponse('**/users?page=2'),
+            page.click("[data-id = \"users\"]"),
+        ]);
         responseStatus = await response.status();
         responseBody = await response.json();
     });
