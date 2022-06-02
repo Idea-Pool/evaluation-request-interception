@@ -3,7 +3,9 @@ import { USER_LIST_SELECTOR } from "../data/selectors.json";
 import { BASE_URL, USER_LIST_URL } from "../data/constants.json";
 
 describe("Request Validation", () => {
-  let browser:puppeteer.Browser, page:puppeteer.Page, interceptedRequest:puppeteer.HTTPRequest;
+  let browser: puppeteer.Browser,
+    page: puppeteer.Page,
+    interceptedRequest: puppeteer.HTTPRequest;
 
   before(async function () {
     browser = await puppeteer.launch();
@@ -17,8 +19,11 @@ describe("Request Validation", () => {
       }
       request.continue();
     });
-    page.click(USER_LIST_SELECTOR);
-    await page.waitForResponse((response) => response.url() === USER_LIST_URL);
+
+    await Promise.all([
+      page.click(USER_LIST_SELECTOR),
+      page.waitForResponse((response) => response.url() === USER_LIST_URL),
+    ]);
   });
 
   describe("Request verification", () => {

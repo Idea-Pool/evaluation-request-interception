@@ -1,11 +1,13 @@
 import * as puppeteer from "puppeteer";
 import { USER_LIST_SELECTOR } from "../data/selectors.json";
 import { BASE_URL, USER_LIST_URL } from "../data/constants.json";
-import * as mockResponseSchema  from "../schemas/mock.json";
+import * as mockResponseSchema from "../schemas/mock.json";
 import { mockResponse } from "../data/response.json";
 
 describe("Response Modification", () => {
-  let browser:puppeteer.Browser, page:puppeteer.Page, interceptedRequest:puppeteer.HTTPRequest;
+  let browser: puppeteer.Browser,
+    page: puppeteer.Page,
+    interceptedRequest: puppeteer.HTTPRequest;
 
   before(async function () {
     browser = await puppeteer.launch();
@@ -26,10 +28,11 @@ describe("Response Modification", () => {
         }
         request.continue();
       });
-      page.click(USER_LIST_SELECTOR);
-      await page.waitForResponse(
-        (response) => response.url() === USER_LIST_URL
-      );
+      await Promise.all([
+        page.click(USER_LIST_SELECTOR),
+        page.waitForResponse((response) => response.url() === USER_LIST_URL),
+      ]);
+
       return expect(interceptedRequest.response().status()).to.be.equal(
         mockResponse.status
       );
@@ -44,19 +47,21 @@ describe("Response Modification", () => {
           }
           request.continue();
         });
-        page.click(USER_LIST_SELECTOR);
-        await page.waitForResponse(
-          (response) => response.url() === USER_LIST_URL
-        );
+
+        await Promise.all([
+          page.click(USER_LIST_SELECTOR),
+          page.waitForResponse((response) => response.url() === USER_LIST_URL),
+        ]);
+
         return expect(
           interceptedRequest.response().json()
         ).to.eventually.be.deep.equal(mockResponse.body);
       });
 
       it("should match partially", async () =>
-        expect(await interceptedRequest.response().json()).to.containSubset(
-          {id:mockResponse.body.id}
-        ));
+        expect(await interceptedRequest.response().json()).to.containSubset({
+          id: mockResponse.body.id,
+        }));
 
       it("should match the schema", async () =>
         expect(await interceptedRequest.response().json()).to.be.jsonSchema(
@@ -68,7 +73,7 @@ describe("Response Modification", () => {
   afterEach(async () => {
     await page.close();
   });
-  
+
   after(async () => {
     await browser.close();
   });

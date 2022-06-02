@@ -1,17 +1,17 @@
-import * as puppeteer from 'puppeteer';
-import {USER_LIST_SELECTOR} from "../data/selectors.json";
-import  {
+import * as puppeteer from "puppeteer";
+import { USER_LIST_SELECTOR } from "../data/selectors.json";
+import * as expectedResponse from "../data/response.json";
+import {
   BASE_URL,
   SINGLE_USER_PATH,
   USER_LIST_URL,
-  MODIFIED_HEADER
+  MODIFIED_HEADER,
 } from "../data/constants.json";
 
-import * as expectedResponse from "../data/response.json";
-
-
 describe("Request Modification", () => {
-  let browser:puppeteer.Browser, page:puppeteer.Page, interceptedRequest:puppeteer.HTTPRequest;
+  let browser: puppeteer.Browser,
+    page: puppeteer.Page,
+    interceptedRequest: puppeteer.HTTPRequest;
 
   before(async function () {
     browser = await puppeteer.launch();
@@ -32,15 +32,16 @@ describe("Request Modification", () => {
         }
         request.continue();
       });
-      page.click(USER_LIST_SELECTOR);
-      await page.waitForResponse(
-        (response) => response.url() === USER_LIST_URL
-      );
+
+      await Promise.all([
+        page.click(USER_LIST_SELECTOR),
+        page.waitForResponse((response) => response.url() === USER_LIST_URL),
+      ]);
       expect(interceptedRequest.method()).to.be.equal("GET");
     });
 
     it("should have the modified URL", async () => {
-      let interceptedRequestId:string, interceptedRequestPath:string;
+      let interceptedRequestId: string, interceptedRequestPath: string;
       const cdpSession = await page.target().createCDPSession();
       await cdpSession.send("Network.enable");
       await cdpSession.on("Network.requestWillBeSent", (requestInfo) => {
@@ -65,14 +66,18 @@ describe("Request Modification", () => {
         }
         request.continue();
       });
-      page.click(USER_LIST_SELECTOR);
-      await page.waitForResponse(
-        (response) => response.url() === USER_LIST_URL
-      );
+
+      await Promise.all([
+        page.click(USER_LIST_SELECTOR),
+        page.waitForResponse((response) => response.url() === USER_LIST_URL),
+      ]);
+
       expect(interceptedRequest.response().json()).to.be.eventually.deep.equal(
         expectedResponse.singleUserResponseBody
       );
+
       expect(interceptedRequestPath).to.be.equal(SINGLE_USER_PATH);
+
       return expect(interceptedRequest.headers().referer).to.be.equal(BASE_URL);
     });
 
@@ -86,14 +91,18 @@ describe("Request Modification", () => {
         }
         request.continue();
       });
-      page.click(USER_LIST_SELECTOR);
-      await page.waitForResponse(
-        (response) => response.url() === USER_LIST_URL
+
+      await Promise.all([
+        page.click(USER_LIST_SELECTOR),
+        page.waitForResponse((response) => response.url() === USER_LIST_URL),
+      ]);
+
+      return expect(interceptedRequest.headers()).to.haveOwnProperty(
+        MODIFIED_HEADER
       );
-      return expect(interceptedRequest.headers()).to.haveOwnProperty(MODIFIED_HEADER);
     });
   });
-  
+
   afterEach(async () => {
     await page.close();
   });

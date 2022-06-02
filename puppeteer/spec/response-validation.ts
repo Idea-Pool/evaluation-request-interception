@@ -29,8 +29,11 @@ describe("Response Validation", () => {
       }
       request.continue();
     });
-    page.click(USER_LIST_SELECTOR);
-    await page.waitForResponse((response) => response.url() === USER_LIST_URL);
+
+    await Promise.all([
+      page.click(USER_LIST_SELECTOR),
+      page.waitForResponse((response) => response.url() === USER_LIST_URL),
+    ]);
 
     performanceData = await page.evaluate(
       (name) => performance.getEntriesByName(name)[1].toJSON(),
