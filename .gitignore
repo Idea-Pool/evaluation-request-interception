@@ -102,5 +102,16 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Playwright
 test-results/
 playwright-report/
+
+# Cypress
+cypress/videos/
+cypress/support/
+cypress/plugins/
+cypress/screenshots/
+
+# Idea files
+.idea/
