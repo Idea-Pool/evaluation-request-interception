@@ -1,24 +1,40 @@
 {
   "name": "evaluation-request-interception",
+  "description": "Tool evaluation",
   "version": "1.0.0",
-  "description": "Idea Pool TA tool evaluation project - Request interception for UI testing",
-  "main": "browser-options.js",
+  "author": "Various Authors",
+  "license": "MIT",
+  "homepage": "https://github.com/Idea-Pool/evaluation-request-interception#readme",
   "scripts": {
+    "test:webdriverio:all": "wdio run wdio.conf.ts",
+    "test:webdriverio:requestValidation": "wdio run wdio.conf.ts --suite requestValidation",
+    "test:webdriverio:responseModification": "wdio run wdio.conf.ts --suite responseModification",
+    "test:webdriverio:responseValidation": "wdio run wdio.conf.ts --suite responseValidation",
+    "test:cypress:all": "cypress run",
+    "test:cypress:gui": "cypress open",
+    "test:cypress:response-validation": "cypress run --spec 'cypress/interceptors/response-validation.spec.js'",
+    "test:cypress:response-modification": "cypress run --spec 'cypress/interceptors/response-modification.spec.js'",
+    "test:cypress:request-validation": "cypress run --spec 'cypress/interceptors/request-validation.spec.js'",
+    "test:cypress:request-modification": "cypress run --spec 'cypress/interceptors/request-modification.spec.js'",
     "test:puppeteer:response-validation": "ts-mocha ./puppeteer/spec/response-modification.ts",
     "test:puppeteer:response-modification": "ts-mocha ./puppeteer/spec/response-modification.ts",
     "test:puppeteer:request-validation": "ts-mocha ./puppeteer/spec/request-validation.ts",
-    "test:puppeteer:request-modification": "ts-mocha ./puppeteer/spec/request-modification.ts"
+    "test:puppeteer:request-modification": "ts-mocha ./puppeteer/spec/request-modification.ts",
+    "prettier:check": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "eslinter:check": "eslint . --ext .js,.ts",
+    "eslinter:fix": "eslint . --ext .js,.ts --fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Idea-Pool/evaluation-request-interception.git"
+  "dependencies": {
+    "@cypress/schema-tools": "^4.7.9",
+    "@wdio/cli": "^7.16.13",
+    "chai": "^4.3.6",
+    "cypress": "^9.5.2",
+    "eslint-plugin-cypress": "^2.12.1",
+    "jquery": "^3.6.0",
+    "jsonschema": "^1.4.0",
+    "typescript": "^4.6.4"
   },
-  "author": "Sandor Simon",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Idea-Pool/evaluation-request-interception/issues"
-  },
-  "homepage": "https://github.com/Idea-Pool/evaluation-request-interception#readme",
   "devDependencies": {
     "@types/chai": "^4.3.1",
     "@types/chai-as-promised": "^7.1.5",
@@ -27,19 +43,28 @@
     "@types/mocha": "^9.1.1",
     "@types/node": "^17.0.35",
     "@types/puppeteer": "^5.4.6",
-    "chai": "^4.3.6",
+    "@types/jquery": "^3.5.14",
     "chai-as-promised": "^7.1.1",
     "chai-deep-match": "^1.2.1",
     "chai-json-schema": "^1.5.1",
     "chai-subset": "^1.6.0",
     "http-status-codes": "^2.2.0",
     "mocha": "^10.0.0",
-    "prettier": "^2.6.0",
     "puppeteer": "^13.5.1",
-    "ts-mocha": "^10.0.0"
-  },
-  "dependencies": {
+    "ts-mocha": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "@wdio/local-runner": "^7.16.13",
+    "@wdio/mocha-framework": "^7.16.13",
+    "@wdio/spec-reporter": "^7.16.13",
+    "chromedriver": "^101.0.0",
+    "eslint": ">=5.16.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "2.6.2",
     "ts-node": "^10.8.0",
-    "typescript": "^4.6.4"
+    "wdio-chromedriver-service": "^7.3.2",
+    "wdio-intercept-service": "^4.2.1",
+    "wdio-wait-for": "^2.2.1"
   }
 }

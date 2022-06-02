@@ -6,10 +6,15 @@
       "chai",
       "chai-json-schema",
       "chai-as-promised",
-      "chai-subset"
+      "chai-subset",
+      "webdriverio/async",
+      "@wdio/mocha-framework",
+      "expect-webdriverio",
+      "wdio-intercept-service"
     ],
     "moduleResolution": "node",
     "target": "ES2018",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   }
 }

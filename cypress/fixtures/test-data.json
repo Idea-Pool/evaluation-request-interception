@@ -1,0 +1,14 @@
+{
+  "baseUrl": "https://reqres.in/",
+  "requestUrl": "https://reqres.in/api/users?page=2",
+  "modifiedUrl": "https://reqres.in/api/users?page=3",
+  "modifiedRequestHeaderProperty": "modified-header-property",
+  "modifiedRequestHeaderPropertyValue": "added by interception",
+  "selectors": {
+    "users": "[data-id='users']",
+    "user": "[data-id='users-single']"
+  },
+  "expectedResponseCode": 200,
+  "modifiedResponseCode": 201,
+  "expectedStatusMessage": "OK"
+}
