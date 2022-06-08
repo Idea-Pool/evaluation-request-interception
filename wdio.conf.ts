@@ -49,9 +49,9 @@ export const config = {
   //
   specs: ['./webdriverIO/tests/**/*.ts'],
   suites: {
-    requestValidation: ['./webdriverIO/tests/request-validation.ts'],
-    responseModification: ['./webdriverIO/tests/response-modification.ts'],
-    responseValidation: ['./webdriverIO/tests/response-validation.ts'],
+    requestValidation: ['./WebdriverIO/tests/request-validation.spec.ts'],
+    responseModification: ['./WebdriverIO/tests/response-modification.spec.ts'],
+    responseValidation: ['./WebdriverIO/tests/response-validation.spec.ts'],
   },
   // Patterns to exclude.
   exclude: [
