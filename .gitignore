@@ -103,7 +103,11 @@ dist
 # TernJS port file
 .tern-port
 
-# cypress
+# Playwright
+test-results/
+playwright-report/
+
+# Cypress
 cypress/videos/
 cypress/support/
 cypress/plugins/
