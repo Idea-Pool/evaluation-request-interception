@@ -31,6 +31,7 @@ describe('Request Validation', () => {
     it('should be a GET method', () => {
       return expect(interceptedRequest.method()).to.equal('GET');
     });
+
     it('should have the correct URL', () => {
       return expect(interceptedRequest.url()).to.equal(USER_LIST_URL);
     });

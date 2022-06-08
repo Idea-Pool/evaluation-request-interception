@@ -2,7 +2,13 @@
   "name": "evaluation-request-interception",
   "version": "1.0.0",
   "description": "Idea Pool TA tool evaluation project - Request interception for UI testing",
-  "author": "Bence Bányász, Gábor Márton, Sándor Simon, Tamás Szűcs",
+  "author": "EPAM IdeaPool <IdeaPool@epam.com> (https://wearecommunity.io/communities/idea-pool)",
+  "contributors": [
+    "Bence Bányász <bence_banyasz@epam.com>",
+    "Gábor Márton <gabor_marton1@epam.com>",
+    "Sándor Simon <sandor_simon@epam.com>",
+    "Tamás Szűcs <tamas_szucs@epam.com>"
+  ],
   "license": "MIT",
   "homepage": "https://github.com/Idea-Pool/evaluation-request-interception#readme",
   "scripts": {
@@ -37,6 +43,7 @@
     "@playwright/test": "^1.21.1",
     "chai": "^4.3.6",
     "cypress": "^9.5.2",
+    "eslint": "^8.17.0",
     "eslint-plugin-cypress": "^2.12.1",
     "jsonschema": "^1.4.0",
     "typescript": "^4.6.4"
@@ -60,7 +67,6 @@
     "chai-json-schema": "^1.5.1",
     "chai-subset": "^1.6.0",
     "chromedriver": "^101.0.0",
-    "eslint": ">=5.16.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.5.0",
     "http-status-codes": "^2.2.0",

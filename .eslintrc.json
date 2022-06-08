@@ -32,6 +32,7 @@
     "no-lonely-if": "error",
     "no-confusing-arrow": "warn",
     "no-else-return": "error",
+    "no-magic-numbers": ["error", { "ignore": [0, 1] }],
     "no-multi-spaces": "error",
     "no-multiple-empty-lines": [
       1,

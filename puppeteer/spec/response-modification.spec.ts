@@ -29,6 +29,7 @@ describe('Response Modification', () => {
         }
         request.continue();
       });
+
       await Promise.all([
         page.click(USER_LIST_SELECTOR),
         page.waitForResponse((response) => response.url() === USER_LIST_URL),

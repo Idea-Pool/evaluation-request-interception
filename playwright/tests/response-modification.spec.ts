@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { StatusCodes } from 'http-status-codes';
 import { modifiedBody } from '../data/response-body';
 
 test.describe('response modification', () => {
@@ -22,7 +23,7 @@ test.describe('response modification', () => {
   });
 
   test('the status code should not be 200', () => {
-    expect(responseStatus).not.toBe(200);
+    expect(responseStatus).not.toBe(StatusCodes.OK);
   });
 
   test('should match exactly', () => {
