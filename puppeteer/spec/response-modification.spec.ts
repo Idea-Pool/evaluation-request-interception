@@ -10,7 +10,7 @@ describe('Response Modification', () => {
   let page: puppeteer.Page;
   let interceptedRequest: puppeteer.HTTPRequest;
 
-  before(async function () {
+  before(async () => {
     browser = await puppeteer.launch();
   });
 

@@ -12,7 +12,7 @@ describe('Response Validation', () => {
   const interceptedRequests: puppeteer.HTTPRequest[] = [];
   let performanceData: any;
 
-  before(async function () {
+  before(async () => {
     browser = await puppeteer.launch();
     page = await browser.newPage();
     await page.goto(BASE_URL);
@@ -43,9 +43,9 @@ describe('Response Validation', () => {
       });
       it('should match exactly', () => expect(responseBody).to.deep.equal(userListResponseBody));
 
-      it('should match partially', async () => expect(responseBody).to.containSubset(partialUsersBody));
+      it('should match partially', () => expect(responseBody).to.containSubset(partialUsersBody));
 
-      it('should match the schema', async () => expect(responseBody).to.be.jsonSchema(userListSchema));
+      it('should match the schema', () => expect(responseBody).to.be.jsonSchema(userListSchema));
     });
   });
 
@@ -55,6 +55,7 @@ describe('Response Validation', () => {
 
   it('the response duration should not be longer than 1s', () => {
     const responseTime = performanceData.responseEnd - performanceData.requestStart;
+
     return expect(responseTime).to.be.below(MAX_RESPONSE_TIME);
   });
 

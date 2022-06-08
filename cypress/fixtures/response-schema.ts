@@ -2,40 +2,16 @@ import { combineSchemas, ObjectSchema, SchemaCollection, versionSchemas } from '
 import { expectedUsersBody } from './response-bodies.json';
 
 const responseUsersBody: ObjectSchema = {
-  version: { major: 1, minor: 0, patch: 0 },
+  example: expectedUsersBody,
   schema: {
-    title: 'Response Body',
-    type: 'object',
-    required: ['page', 'per_page', 'total', 'total_pages', 'data', 'support'],
     additionalProperties: false,
     properties: {
-      page: {
-        title: 'Page',
-        type: 'integer',
-      },
-      per_page: {
-        title: 'Per_page',
-        type: 'integer',
-      },
-      total: {
-        title: 'Total',
-        type: 'integer',
-      },
-      total_pages: {
-        title: 'Total_pages',
-        type: 'integer',
-      },
       data: {
-        title: 'Data',
-        type: 'array',
         items: {
-          title: 'Items',
-          type: 'object',
-          required: ['id', 'email', 'first_name', 'last_name', 'avatar'],
           properties: {
-            id: {
-              title: 'Id',
-              type: 'integer',
+            avatar: {
+              title: 'Avatar',
+              type: 'string',
             },
             email: {
               title: 'Email',
@@ -45,35 +21,59 @@ const responseUsersBody: ObjectSchema = {
               title: 'First_name',
               type: 'string',
             },
+            id: {
+              title: 'Id',
+              type: 'integer',
+            },
             last_name: {
               title: 'Last_name',
               type: 'string',
             },
-            avatar: {
-              title: 'Avatar',
-              type: 'string',
-            },
           },
+          required: ['id', 'email', 'first_name', 'last_name', 'avatar'],
+          title: 'Items',
+          type: 'object',
         },
+        title: 'Data',
+        type: 'array',
+      },
+      page: {
+        title: 'Page',
+        type: 'integer',
+      },
+      per_page: {
+        title: 'Per_page',
+        type: 'integer',
       },
       support: {
-        title: 'Support',
-        type: 'object',
-        required: ['url', 'text'],
         properties: {
-          url: {
-            title: 'Url',
-            type: 'string',
-          },
           text: {
             title: 'Text',
             type: 'string',
           },
+          url: {
+            title: 'Url',
+            type: 'string',
+          },
         },
+        required: ['url', 'text'],
+        title: 'Support',
+        type: 'object',
+      },
+      total: {
+        title: 'Total',
+        type: 'integer',
+      },
+      total_pages: {
+        title: 'Total_pages',
+        type: 'integer',
       },
     },
+    required: ['page', 'per_page', 'total', 'total_pages', 'data', 'support'],
+    title: 'Response Body',
+    type: 'object',
   },
-  example: expectedUsersBody,
+  version: { major: 1, minor: 0, patch: 0 },
 };
 
 const bodyVersions = versionSchemas(responseUsersBody);

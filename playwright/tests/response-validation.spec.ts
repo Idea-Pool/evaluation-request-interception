@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { partialBody } from '../data/response-body';
 import { fullBody } from '../data/users';
 
-test.describe('response validation', async () => {
+test.describe('response validation', () => {
   let response;
   let responseBody;
 
@@ -30,7 +30,7 @@ test.describe('response validation', async () => {
     const requestStart = request.timing().requestStart;
     const responseEnd = request.timing().responseEnd;
     const totalRunTime = responseEnd - requestStart;
-    await expect(totalRunTime).toBeLessThan(1000);
+    expect(totalRunTime).toBeLessThan(1000);
   });
 
   test('the number of responses should be 1', async ({ page }) => {

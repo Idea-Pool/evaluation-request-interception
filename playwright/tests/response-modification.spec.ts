@@ -11,8 +11,8 @@ test.describe('response modification', () => {
 
     await page.route('**/users?page=2', (route) =>
       route.fulfill({
-        status: 404,
         body: JSON.stringify(modifiedBody),
+        status: 404,
       }),
     );
 
@@ -21,11 +21,11 @@ test.describe('response modification', () => {
     responseBody = await response.json();
   });
 
-  test('the status code should not be 200', async () => {
+  test('the status code should not be 200', () => {
     expect(responseStatus).not.toBe(200);
   });
 
-  test('should match exactly', async () => {
+  test('should match exactly', () => {
     expect(responseBody).toEqual(modifiedBody);
   });
 });

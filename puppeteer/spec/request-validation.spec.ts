@@ -8,7 +8,7 @@ describe('Request Validation', () => {
   let page: puppeteer.Page;
   let interceptedRequest: puppeteer.HTTPRequest;
 
-  before(async function () {
+  before(async () => {
     browser = await puppeteer.launch();
     page = await browser.newPage();
     await page.setCacheEnabled(false);

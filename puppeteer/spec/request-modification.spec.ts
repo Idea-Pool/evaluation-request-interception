@@ -9,7 +9,7 @@ describe('Request Modification', () => {
   let page: puppeteer.Page;
   let interceptedRequest: puppeteer.HTTPRequest;
 
-  before(async function () {
+  before(async () => {
     browser = await puppeteer.launch();
   });
 
@@ -56,6 +56,7 @@ describe('Request Modification', () => {
         if (request.url() === USER_LIST_URL) {
           interceptedRequest = request;
           request.continue({ url: 'https://reqres.in/api/users/2' });
+
           return;
         }
         request.continue();
