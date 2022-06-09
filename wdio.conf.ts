@@ -87,8 +87,8 @@ export const config = {
       maxInstances: 5,
       //
       browserName: 'chrome',
-      chromeOptions: {
-        args: ['--headless'],
+      'goog:chromeOptions': {
+        args: ['--headless', '--disable-gpu'],
       },
       acceptInsecureCerts: true,
       // If outputDir is provided WebdriverIO can capture driver session logs
