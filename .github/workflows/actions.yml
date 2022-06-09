@@ -22,4 +22,13 @@ jobs:
           cmd: eslinter:check
       - uses: Borales/actions-yarn@v3.0.0
         with:
-          cmd: test:all
+          cmd: test:cypress:all
+      - uses: Borales/actions-yarn@v3.0.0
+        with:
+          cmd: test:puppeteer:all
+      - uses: Borales/actions-yarn@v3.0.0
+        with:
+          cmd: test:playwright:all
+      - uses: Borales/actions-yarn@v3.0.0
+        with:
+          cmd: test:webdriverio:all
