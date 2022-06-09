@@ -5,11 +5,11 @@ export const partialBody = {
 
 export const modifiedBody = {
   data: {
-    id: 13,
+    avatar: 'https://epam.com',
     email: 'ideapool@ideapool.epam',
     first_name: 'Epam',
+    id: 13,
     last_name: 'Systems',
-    avatar: 'https://epam.com',
   },
   support: {
     text: 'Welcome to Epam!',

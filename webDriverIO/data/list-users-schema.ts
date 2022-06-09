@@ -1,54 +1,54 @@
 const userSchema = {
-  type: 'object',
   properties: {
-    id: { type: 'number' },
-    email: {
+    avatar: {
+      format: 'URI',
       type: 'string',
+    },
+    email: {
       format: 'email',
+      type: 'string',
     },
     first_name: {
-      type: 'string',
       minLength: 1,
+      type: 'string',
     },
+    id: { type: 'number' },
     last_name: {
-      type: 'string',
       minLength: 1,
-    },
-    avatar: {
       type: 'string',
-      format: 'URI',
     },
   },
   required: ['id', 'email', 'first_name', 'last_name', 'avatar'],
+  type: 'object',
 };
 
 const supportSchema = {
-  type: 'object',
   properties: {
-    url: {
-      type: 'string',
-      format: 'URI',
-    },
     text: {
-      type: 'string',
       minLength: 1,
+      type: 'string',
+    },
+    url: {
+      format: 'URI',
+      type: 'string',
     },
   },
   required: ['url', 'text'],
+  type: 'object',
 };
 
 export const multipleUsersSchema = {
-  type: 'object',
   properties: {
+    data: {
+      items: userSchema,
+      type: 'array',
+    },
     page: { type: 'number' },
     per_page: { type: 'number' },
+    support: supportSchema,
     total: { type: 'number' },
     total_pages: { type: 'number' },
-    data: {
-      type: 'array',
-      items: userSchema,
-    },
-    support: supportSchema,
   },
   required: ['page', 'per_page', 'total', 'total_pages', 'data', 'support'],
+  type: 'object',
 };

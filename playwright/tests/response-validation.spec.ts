@@ -1,10 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { StatusCodes } from 'http-status-codes';
 import { partialBody } from '../data/response-body';
 import { fullBody } from '../data/users';
 
-test.describe('response validation', async () => {
+test.describe('response validation', () => {
   let response;
   let responseBody;
+  const MAX_RESPONSE_TIME = 1000;
 
   test.beforeEach(async ({ page }) => {
     await page.goto('');
@@ -14,7 +16,7 @@ test.describe('response validation', async () => {
   });
 
   test('the status code should be 200', () => {
-    expect(response.status()).toBe(200);
+    expect(response.status()).toBe(StatusCodes.OK);
   });
 
   test('should match partially', () => {
@@ -30,7 +32,7 @@ test.describe('response validation', async () => {
     const requestStart = request.timing().requestStart;
     const responseEnd = request.timing().responseEnd;
     const totalRunTime = responseEnd - requestStart;
-    await expect(totalRunTime).toBeLessThan(1000);
+    expect(totalRunTime).toBeLessThan(MAX_RESPONSE_TIME);
   });
 
   test('the number of responses should be 1', async ({ page }) => {

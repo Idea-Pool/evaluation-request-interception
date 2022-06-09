@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { StatusCodes } from 'http-status-codes';
 import { modifiedBody } from '../data/response-body';
 
 test.describe('response modification', () => {
@@ -11,8 +12,8 @@ test.describe('response modification', () => {
 
     await page.route('**/users?page=2', (route) =>
       route.fulfill({
-        status: 404,
         body: JSON.stringify(modifiedBody),
+        status: 404,
       }),
     );
 
@@ -21,11 +22,11 @@ test.describe('response modification', () => {
     responseBody = await response.json();
   });
 
-  test('the status code should not be 200', async () => {
-    expect(responseStatus).not.toBe(200);
+  test('the status code should not be 200', () => {
+    expect(responseStatus).not.toBe(StatusCodes.OK);
   });
 
-  test('should match exactly', async () => {
+  test('should match exactly', () => {
     expect(responseBody).toEqual(modifiedBody);
   });
 });

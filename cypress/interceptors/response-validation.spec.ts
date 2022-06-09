@@ -6,6 +6,7 @@ import { CyHttpMessages } from 'cypress/types/net-stubbing';
 
 describe('Response Validation', () => {
   let usersResponse: CyHttpMessages.IncomingResponse;
+  const MAX_RESPONSE_TIME = 1000;
 
   beforeEach(() => {
     cy.visit('/');
@@ -55,7 +56,7 @@ describe('Response Validation', () => {
     cy.get(selectors.users).click();
     cy.wait('@usersRequest').should(() => {
       const responseTimestamp = Date.now();
-      expect(responseTimestamp - clickTimestamp).to.be.lessThan(1000);
+      expect(responseTimestamp - clickTimestamp).to.be.lessThan(MAX_RESPONSE_TIME);
     });
   });
 });

@@ -7,6 +7,8 @@ import WdioInterceptorService from 'wdio-intercept-service';
 const users = require('../data/users.json');
 
 describe('Response validation', () => {
+  const MAX_RESPONSE_TIME = 1000;
+
   before(async () => {
     await browser.url('/');
   });
@@ -68,6 +70,6 @@ describe('Response validation', () => {
     await browser.assertExpectedRequestsOnly();
     await browser.getRequest(0);
     const endTime = new Date().getTime();
-    expect(endTime - startTime).to.be.lessThan(1000);
+    expect(endTime - startTime).to.be.lessThan(MAX_RESPONSE_TIME);
   });
 });
