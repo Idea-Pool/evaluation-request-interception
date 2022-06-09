@@ -11,12 +11,12 @@ import {
 import WdioInterceptorService from 'wdio-intercept-service';
 import * as users from '../../WebdriverIO/data/users.json';
 
-describe('Response modification', () => {
+describe('Response modification', async () => {
   before(async () => {
     await browser.url('/');
   });
 
-  describe('Modified response verification', () => {
+  describe('Modified response verification', async () => {
     let request;
 
     before(async () => {

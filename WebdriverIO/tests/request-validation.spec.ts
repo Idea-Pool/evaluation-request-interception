@@ -7,12 +7,12 @@ import {
 } from '../../WebdriverIO/data/test-data.json';
 import WdioInterceptorService from 'wdio-intercept-service';
 
-describe('Request validation', () => {
+describe('Request validation', async () => {
   before(async () => {
     await browser.url('/');
   });
 
-  describe('Request verification', () => {
+  describe('Request verification', async () => {
     before(async () => {
       const getUsers = $(`${usersSelector}`);
       browser.setupInterceptor();

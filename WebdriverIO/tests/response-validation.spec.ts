@@ -10,14 +10,14 @@ import {
 import WdioInterceptorService from 'wdio-intercept-service';
 import * as users from '../../WebdriverIO/data/users.json';
 
-describe('Response validation', () => {
+describe('Response validation', async () => {
   const MAX_RESPONSE_TIME = 1000;
 
   before(async () => {
     await browser.url('/');
   });
 
-  describe('Response verification', () => {
+  describe('Response verification', async () => {
     let getUsers;
     let request;
 
