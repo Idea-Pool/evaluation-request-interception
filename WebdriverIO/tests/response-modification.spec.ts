@@ -63,9 +63,6 @@
 // });
 
 import { expect } from 'chai';
+import { usersSelector } from '../data/test-data.json';
 
-describe('test', () => {
-  it('should work', () => {
-    expect(true).to.eq(true);
-  });
-});
+console.log(usersSelector);
