@@ -12,8 +12,7 @@
       "expect-webdriverio",
       "wdio-intercept-service"
     ],
-    "module": "ESNext",
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "node",
     "target": "ES2018",
     "resolveJsonModule": true,
     "esModuleInterop": true

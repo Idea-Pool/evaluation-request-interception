@@ -63,6 +63,6 @@
 // });
 
 import { expect } from 'chai';
-import * as something from '../data/test-data.json';
+import * as something from './test-data.json';
 
 console.log(something);
