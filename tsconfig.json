@@ -12,7 +12,8 @@
       "expect-webdriverio",
       "wdio-intercept-service"
     ],
-    "moduleResolution": "node",
+    "module": "CommonJS",
+    "moduleResolution": "NodeNext",
     "target": "ES2018",
     "resolveJsonModule": true,
     "esModuleInterop": true
