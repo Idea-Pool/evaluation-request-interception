@@ -1,9 +1,10 @@
-import { multipleUsersSchema } from '../data/list-users-schema';
-import { validate, ValidatorResult } from 'jsonschema';
 import { expect } from 'chai';
-import { expectedRequestMethod, expectedResponseStatusCode, expectedURL, usersSelector } from '../data/test-data.json';
 import WdioInterceptorService from 'wdio-intercept-service';
+import { validate, ValidatorResult } from 'jsonschema';
+
+import { expectedRequestMethod, expectedResponseStatusCode, expectedURL, usersSelector } from '../data/test-data.json';
 import * as users from '../data/users.json';
+import { multipleUsersSchema } from '../data/list-users-schema';
 
 describe('Response validation', () => {
   const MAX_RESPONSE_TIME = 1000;

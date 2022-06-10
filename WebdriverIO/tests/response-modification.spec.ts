@@ -1,6 +1,7 @@
-import { multipleUsersSchema } from '../data/list-users-schema';
+import WdioInterceptorService from 'wdio-intercept-service';
 import { validate, ValidatorResult } from 'jsonschema';
 import { expect } from 'chai';
+
 import {
   expectedRequestMethod,
   expectedResponseStatusCode,
@@ -8,8 +9,8 @@ import {
   modifiedResponseStatusCode,
   usersSelector,
 } from '../data/test-data.json';
-import WdioInterceptorService from 'wdio-intercept-service';
 import * as users from '../data/users.json';
+import { multipleUsersSchema } from '../data/list-users-schema';
 
 describe('Response modification', () => {
   before(async () => {
