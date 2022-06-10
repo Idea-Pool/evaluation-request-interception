@@ -15,7 +15,7 @@ describe('Request validation', async () => {
   describe('Request verification', async () => {
     before(async () => {
       const getUsers = $(`${usersSelector}`);
-      browser.setupInterceptor();
+      await browser.setupInterceptor();
       await getUsers.click();
     });
 

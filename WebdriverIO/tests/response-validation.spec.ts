@@ -23,7 +23,7 @@ describe('Response validation', async () => {
 
     before(async () => {
       getUsers = $(`${usersSelector}`);
-      browser.setupInterceptor();
+      await browser.setupInterceptor();
       await getUsers.click();
     });
 
@@ -62,7 +62,7 @@ describe('Response validation', async () => {
 
   it('should return the response under 1 second', async () => {
     const getUsers = $(`${usersSelector}`);
-    browser.setupInterceptor();
+    await browser.setupInterceptor();
 
     const startTime = new Date().getTime();
     await getUsers.click();

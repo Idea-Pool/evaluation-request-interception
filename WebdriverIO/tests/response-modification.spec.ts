@@ -21,7 +21,7 @@ describe('Response modification', async () => {
 
     before(async () => {
       const getUsers = $(`${usersSelector}`);
-      browser.setupInterceptor();
+      await browser.setupInterceptor();
       await getUsers.click();
     });
 
