@@ -56,7 +56,7 @@ describe('Response validation', () => {
     });
   });
 
-  it('should return the response under 1 second', async () => {
+  it('should return the response under a few seconds', async () => {
     const getUsers = $(`${usersSelector}`);
     browser.setupInterceptor();
 
