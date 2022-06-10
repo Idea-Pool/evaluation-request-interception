@@ -63,6 +63,6 @@
 // });
 
 import { expect } from 'chai';
-import { usersSelector } from '../data/test-data.json';
+import * as something from '../data/test-data.json';
 
-console.log(usersSelector);
+console.log(something);
