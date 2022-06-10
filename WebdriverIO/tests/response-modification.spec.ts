@@ -8,9 +8,9 @@ import {
   expectedURL,
   modifiedResponseStatusCode,
   usersSelector,
-} from '../data/test-data.json';
-import * as users from '../data/users.json';
-import { multipleUsersSchema } from '../data/list-users-schema';
+} from './test-data.json';
+import * as users from './users.json';
+import { multipleUsersSchema } from './list-users-schema';
 
 describe('Response modification', () => {
   before(async () => {
