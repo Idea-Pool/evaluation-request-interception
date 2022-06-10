@@ -1,6 +1,8 @@
+
 {
   "name": "evaluation-request-interception",
-    "version": "1.0.0",  "description": "Idea Pool TA tool evaluation project - Request interception for UI testing",
+  "version": "1.0.0",
+  "description": "Idea Pool TA tool evaluation project - Request interception for UI testing",
   "author": "EPAM IdeaPool <IdeaPool@epam.com> (https://wearecommunity.io/communities/idea-pool)",
   "contributors": [
     "Bence Bányász <bence_banyasz@epam.com>",
@@ -74,8 +76,8 @@
     "puppeteer": "^13.5.1",
     "ts-mocha": "^10.0.0",
     "ts-node": "^10.8.0",
-
-ice": "^4.2.1",
+    "wdio-chromedriver-service": "^7.3.2",
+    "wdio-intercept-service": "^4.2.1",
     "wdio-wait-for": "^2.2.1"
   }
 }
