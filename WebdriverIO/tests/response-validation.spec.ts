@@ -3,8 +3,7 @@ import { validate, ValidatorResult } from 'jsonschema';
 import { expect } from 'chai';
 import { expectedRequestMethod, expectedResponseStatusCode, expectedURL, usersSelector } from '../data/test-data.json';
 import WdioInterceptorService from 'wdio-intercept-service';
-
-const users = require('../data/users.json');
+import * as users from '../data/users.json';
 
 describe('Response validation', () => {
   const MAX_RESPONSE_TIME = 1000;

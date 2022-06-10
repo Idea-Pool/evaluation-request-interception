@@ -17,7 +17,7 @@
     "prettier:fix": "prettier --write .",
     "eslinter:check": "eslint . --ext .js,.ts",
     "eslinter:fix": "eslint . --ext .js,.ts --fix",
-    "test:all": "yarn test:webdriverio:all && yarn test:cypress:all && yarn test:puppeteer:all && yarn test:playwright:all",
+    "test:all": "yarn test:cypress:all && yarn test:puppeteer:all && yarn test:playwright:all && yarn test:webdriverio:all",
     "test:webdriverio:all": "wdio run wdio.conf.ts",
     "test:webdriverio:response-validation": "wdio run wdio.conf.ts --suite responseValidation",
     "test:webdriverio:response-modification": "wdio run wdio.conf.ts --suite responseModification",

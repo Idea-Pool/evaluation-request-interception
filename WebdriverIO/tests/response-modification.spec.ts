@@ -9,8 +9,7 @@ import {
   usersSelector,
 } from '../data/test-data.json';
 import WdioInterceptorService from 'wdio-intercept-service';
-
-const users = require('../data/users.json');
+import * as users from '../data/users.json';
 
 describe('Response modification', () => {
   before(async () => {
