@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import WdioInterceptorService from 'wdio-intercept-service';
-import { expectedRequestMethod, expectedResponseStatusCode, expectedURL, usersSelector } from './test-data.json';
+import { expectedRequestMethod, expectedResponseStatusCode, expectedURL, usersSelector } from '../data/test-data.json';
 
 describe('Request validation', () => {
   before(async () => {
