@@ -7,7 +7,7 @@ import * as users from './users.json';
 import { multipleUsersSchema } from './list-users-schema';
 
 describe('Response validation', () => {
-  const MAX_RESPONSE_TIME = 1000;
+  const MAX_RESPONSE_TIME = 5000;
 
   before(async () => {
     await browser.url('/');
