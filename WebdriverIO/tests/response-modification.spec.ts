@@ -1,4 +1,4 @@
-import { multipleUsersSchema } from './list-users-schema';
+import { multipleUsersSchema } from '../data/list-users-schema';
 import { validate, ValidatorResult } from 'jsonschema';
 import { expect } from 'chai';
 import {
@@ -7,7 +7,7 @@ import {
   expectedURL,
   modifiedResponseStatusCode,
   usersSelector,
-} from './test-data.json';
+} from '../data/test-data.json';
 import WdioInterceptorService from 'wdio-intercept-service';
 import * as users from '../data/users.json';
 
