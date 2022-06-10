@@ -38,6 +38,13 @@
 import { expect } from 'chai';
 
 describe('test', () => {
+  before(async () => {
+    await browser.url('/');
+    const getUsers = $('[data-id="users"]');
+    await browser.setupInterceptor();
+    await getUsers.click();
+  });
+
   it('should work', () => {
     expect(true).to.eq(true);
   });
