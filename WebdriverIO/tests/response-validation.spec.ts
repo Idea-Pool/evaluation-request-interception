@@ -1,13 +1,13 @@
-import { multipleUsersSchema } from '../data/list-users-schema';
-import { validate, ValidatorResult } from 'jsonschema';
 import { expect } from 'chai';
-import { expectedRequestMethod, expectedResponseStatusCode, expectedURL, usersSelector } from '../data/test-data.json';
 import WdioInterceptorService from 'wdio-intercept-service';
+import { validate, ValidatorResult } from 'jsonschema';
 
-const users = require('../data/users.json');
+import { expectedRequestMethod, expectedResponseStatusCode, expectedURL, usersSelector } from '../data/test-data.json';
+import * as users from '../data/users.json';
+import { multipleUsersSchema } from '../data/list-users-schema';
 
 describe('Response validation', () => {
-  const MAX_RESPONSE_TIME = 1000;
+  const MAX_RESPONSE_TIME = 5000;
 
   before(async () => {
     await browser.url('/');
@@ -56,7 +56,7 @@ describe('Response validation', () => {
     });
   });
 
-  it('should return the response under 1 second', async () => {
+  it('should return the response under a few seconds', async () => {
     const getUsers = $(`${usersSelector}`);
     browser.setupInterceptor();
 

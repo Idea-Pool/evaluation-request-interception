@@ -47,7 +47,7 @@ export const config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: ['./webdriverIO/tests/**/*.ts'],
+  specs: ['./WebdriverIO/tests/**/*.spec.ts'],
   suites: {
     requestValidation: ['./WebdriverIO/tests/request-validation.spec.ts'],
     responseModification: ['./WebdriverIO/tests/response-modification.spec.ts'],
@@ -87,6 +87,9 @@ export const config = {
       maxInstances: 5,
       //
       browserName: 'chrome',
+      'goog:chromeOptions': {
+        args: ['--headless', '--disable-gpu'],
+      },
       acceptInsecureCerts: true,
       // If outputDir is provided WebdriverIO can capture driver session logs
       // it is possible to configure which logTypes to include/exclude.
