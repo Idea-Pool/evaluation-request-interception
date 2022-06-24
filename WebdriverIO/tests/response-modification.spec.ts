@@ -4,7 +4,6 @@ import { expect } from 'chai';
 
 import {
   expectedRequestMethod,
-  expectedResponseStatusCode,
   expectedURL,
   modifiedResponseStatusCode,
   usersSelector,
