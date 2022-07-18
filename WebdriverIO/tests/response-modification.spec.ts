@@ -4,6 +4,7 @@ import { expect } from 'chai';
 
 import {
   expectedRequestMethod,
+  expectedResponseStatusCode,
   expectedURL,
   modifiedResponseStatusCode,
   usersSelector,
@@ -22,9 +23,6 @@ describe('Response modification', () => {
     before(async () => {
       const getUsers = $(`${usersSelector}`);
       browser.setupInterceptor();
-
-      const mockResponse = await browser.mock(`**${ expectedURL }`, { method: 'get' });
-      mockResponse.respond(users.modifiedFullUsersBody, { statusCode: modifiedResponseStatusCode });
       await getUsers.click();
     });
 
@@ -32,13 +30,14 @@ describe('Response modification', () => {
       await browser.expectRequest(
         <WdioInterceptorService.HTTPMethod>expectedRequestMethod,
         expectedURL,
-        modifiedResponseStatusCode,
+        expectedResponseStatusCode,
       );
       await browser.assertExpectedRequestsOnly();
     });
 
     it('should return 202 status code after modifying the response', async () => {
       request = await browser.getRequest(0);
+      request.response.statusCode = modifiedResponseStatusCode;
       expect(request.response.statusCode).to.equal(modifiedResponseStatusCode);
     });
 
@@ -51,11 +50,13 @@ describe('Response modification', () => {
 
       it('should fully match the modified response', async () => {
         request = await browser.getRequest(0);
+        request.response.body = users.modifiedFullUsersBody;
         expect(request.response.body).to.deep.equal(users.modifiedFullUsersBody);
       });
 
       it('should partially match the modified response', async () => {
         request = await browser.getRequest(0);
+        request.response.body = users.modifiedFullUsersBody;
         expect(request.response.body).to.deep.contain(users.modifiedPartialUsersBody);
       });
     });
