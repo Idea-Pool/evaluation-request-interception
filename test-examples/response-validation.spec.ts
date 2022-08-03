@@ -5,6 +5,7 @@ describe('Response Validation', () => {
       it('should match exactly', () => {});
       it('should match partially', () => {});
       it('should match the schema', () => {});
+      it('should appear on the UI', () => {});
     });
   });
   it('the number of responses should be 1', () => {});

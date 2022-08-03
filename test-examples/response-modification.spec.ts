@@ -5,6 +5,7 @@ describe('Response Modification', () => {
       it('should match exactly', () => {});
       it('should match partially', () => {});
       it('should match the schema', () => {});
+      it('should appear on the UI', () => {});
     });
   });
 });
