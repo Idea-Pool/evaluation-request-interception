@@ -7,7 +7,7 @@ import { CyHttpMessages } from 'cypress/types/net-stubbing';
 describe('Response Modification', () => {
   let usersResponse: CyHttpMessages.IncomingResponse;
 
-  beforeEach(() => {
+  before(() => {
     cy.visit('/');
     cy.intercept('GET', '/api/users?page=2', (req) => {
       req.continue((res) => {
@@ -38,6 +38,15 @@ describe('Response Modification', () => {
 
       it('should match the schema', () => {
         expect(() => assertSchema(schemas)('Response Body', '1.0.0')(usersResponse.body)).to.not.throw();
+      });
+
+      it('should appear on the UI', () => {
+        cy.get(selectors.uiUsersResponse)
+          .invoke('text')
+          .then((textContent) => {
+            const parsedTextContent = JSON.parse(textContent);
+            expect(parsedTextContent).to.deep.equal(modifiedUsersBody);
+          });
       });
     });
   });
