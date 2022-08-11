@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer';
-import { USER_LIST_SELECTOR } from '../data/selectors.json';
+import { OUTPUT_RESPONSE, USER_LIST_SELECTOR } from '../data/selectors.json';
 import { BASE_URL, USER_LIST_URL } from '../data/constants.json';
 import * as mockResponseSchema from '../schemas/mock.json';
 import { mockResponse } from '../data/response.json';
@@ -9,6 +9,7 @@ describe('Response Modification', () => {
   let browser: puppeteer.Browser;
   let page: puppeteer.Page;
   let interceptedRequest: puppeteer.HTTPRequest;
+  let displayedResponse: object;
 
   before(async () => {
     browser = await puppeteer.launch();
@@ -39,7 +40,7 @@ describe('Response Modification', () => {
     });
 
     describe('The modified response body', () => {
-      it('should match exactly', async () => {
+      beforeEach(async () => {
         page.on('request', (request) => {
           if (request.url() === USER_LIST_URL) {
             interceptedRequest = request;
@@ -52,7 +53,9 @@ describe('Response Modification', () => {
           page.click(USER_LIST_SELECTOR),
           page.waitForResponse((response) => response.url() === USER_LIST_URL),
         ]);
+      });
 
+      it('should match exactly', async () => {
         return expect(interceptedRequest.response().json()).to.eventually.be.deep.equal(mockResponse.body);
       });
 
@@ -63,6 +66,15 @@ describe('Response Modification', () => {
 
       it('should match the schema', async () =>
         expect(await interceptedRequest.response().json()).to.be.jsonSchema(mockResponseSchema));
+
+      it('should appear on the UI', async () => {
+        displayedResponse = await page.evaluate(() => {
+          const element = document.querySelector("[data-key='output-response']");
+          return JSON.parse(element.textContent);
+        });
+
+        expect(displayedResponse).to.be.deep.equal(mockResponse.body);
+      });
     });
   });
 
