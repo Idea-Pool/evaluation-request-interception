@@ -6,7 +6,8 @@
   "modifiedRequestHeaderPropertyValue": "added by interception",
   "selectors": {
     "users": "[data-id='users']",
-    "user": "[data-id='users-single']"
+    "user": "[data-id='users-single']",
+    "uiUsersResponse": "[data-key=output-response]"
   },
   "expectedResponseCode": 200,
   "modifiedResponseCode": 201,

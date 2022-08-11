@@ -8,7 +8,7 @@ describe('Response Validation', () => {
   let usersResponse: CyHttpMessages.IncomingResponse;
   const MAX_RESPONSE_TIME = 1000;
 
-  beforeEach(() => {
+  before(() => {
     cy.visit('/');
     cy.intercept('GET', '/api/users?page=2').as('usersRequest');
     cy.get(selectors.users).click();
@@ -42,6 +42,15 @@ describe('Response Validation', () => {
       it('should match the schema', () => {
         expect(() => assertSchema(schemas)('Response Body', '1.0.0')(usersResponse.body)).to.not.throw();
       });
+
+      it('should appear on the UI', () => {
+        cy.get(selectors.uiUsersResponse)
+          .invoke('text')
+          .then((textContent) => {
+            const parsedTextContent = JSON.parse(textContent);
+            expect(parsedTextContent).to.deep.equal(expectedUsersBody);
+          });
+      });
     });
   });
 
@@ -52,6 +61,8 @@ describe('Response Validation', () => {
 
   it('The response duration should not be longer than 1s', () => {
     // CYPRESS has no built in method for checking response duration.
+
+    cy.intercept('GET', '/api/users?page=2').as('usersRequest');
     const clickTimestamp = Date.now();
     cy.get(selectors.users).click();
     cy.wait('@usersRequest').should(() => {
