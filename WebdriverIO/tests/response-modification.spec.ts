@@ -5,8 +5,9 @@ import { expect } from 'chai';
 import {
   expectedRequestMethod,
   expectedURL,
-  modifiedResponseStatusCode, usersResponseSelector,
+  modifiedResponseStatusCode,
   usersSelector,
+  usersResponseSelector,
 } from '../data/test-data.json';
 import * as users from '../data/users.json';
 import { multipleUsersSchema } from '../data/list-users-schema';
@@ -20,7 +21,7 @@ describe('Response modification', () => {
     let request;
 
     before(async () => {
-      const getUsers = $(`${usersSelector}`);
+      const getUsers = $(`${ usersSelector }`);
       browser.setupInterceptor();
 
       const mockResponse = await browser.mock(`**${ expectedURL }`, { method: 'get' });
