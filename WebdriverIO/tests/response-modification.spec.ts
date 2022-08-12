@@ -5,7 +5,7 @@ import { expect } from 'chai';
 import {
   expectedRequestMethod,
   expectedURL,
-  modifiedResponseStatusCode,
+  modifiedResponseStatusCode, usersResponseSelector,
   usersSelector,
 } from '../data/test-data.json';
 import * as users from '../data/users.json';
@@ -57,6 +57,13 @@ describe('Response modification', () => {
       it('should partially match the modified response', async () => {
         request = await browser.getRequest(0);
         expect(request.response.body).to.deep.contain(users.modifiedPartialUsersBody);
+      });
+
+      it('should appear on the UI', async () => {
+        request = await browser.getRequest(0);
+        const usersResponse = JSON.parse(await $(`${ usersResponseSelector }`).getText());
+
+        expect(usersResponse).to.deep.equal(users.modifiedFullUsersBody);
       });
     });
   });

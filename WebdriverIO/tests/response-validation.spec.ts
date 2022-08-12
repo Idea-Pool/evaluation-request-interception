@@ -2,7 +2,13 @@ import { expect } from 'chai';
 import WdioInterceptorService from 'wdio-intercept-service';
 import { validate, ValidatorResult } from 'jsonschema';
 
-import { expectedRequestMethod, expectedResponseStatusCode, expectedURL, usersSelector } from '../data/test-data.json';
+import {
+  expectedRequestMethod,
+  expectedResponseStatusCode,
+  expectedURL,
+  usersSelector,
+  usersResponseSelector,
+} from '../data/test-data.json';
 import * as users from '../data/users.json';
 import { multipleUsersSchema } from '../data/list-users-schema';
 
@@ -52,6 +58,13 @@ describe('Response validation', () => {
       it('should partially match the original response', async () => {
         request = await browser.getRequest(0);
         expect(request.response.body).to.deep.contain(users.originalPartialUsersBody);
+      });
+
+      it('should appear on the UI', async () => {
+        request = await browser.getRequest(0);
+        const usersResponse = JSON.parse(await $(`${ usersResponseSelector }`).getText());
+
+        expect(usersResponse).to.deep.equal(users.originalFullUsersBody);
       });
     });
   });
