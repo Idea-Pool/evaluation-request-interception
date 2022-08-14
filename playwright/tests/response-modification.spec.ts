@@ -29,4 +29,9 @@ test.describe('response modification', () => {
   test('should match exactly', () => {
     expect(responseBody).toEqual(modifiedBody);
   });
+
+  test('should appear on the UI', async ({page}) => {
+    const text = await page.locator('[data-key=output-response]').textContent();
+    expect(text).toEqual(modifiedBody);
+  });
 });

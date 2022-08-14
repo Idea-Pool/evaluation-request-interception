@@ -43,4 +43,9 @@ test.describe('response validation', () => {
     await page.click('[data-id = "users"]');
     expect(urls).toEqual(1);
   });
+
+  test('should appear on the UI', async ({page}) => {
+    const text = await page.locator('[data-key=output-response]').textContent();
+    expect(text).toEqual(fullBody);
+  });
 });
