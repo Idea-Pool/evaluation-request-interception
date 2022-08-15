@@ -68,10 +68,10 @@ describe('Response Modification', () => {
         expect(await interceptedRequest.response().json()).to.be.jsonSchema(mockResponseSchema));
 
       it('should appear on the UI', async () => {
-        displayedResponse = await page.evaluate(() => {
-          const element = document.querySelector(OUTPUT_RESPONSE);
+        displayedResponse = await page.evaluate((selector) => {
+          const element = document.querySelector(selector);
           return JSON.parse(element.textContent);
-        });
+        }, OUTPUT_RESPONSE);
 
         expect(displayedResponse).to.be.deep.equal(mockResponse.body);
       });
