@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer';
-import { USER_LIST_SELECTOR } from '../data/selectors.json';
+import { USER_LIST_SELECTOR, OUTPUT_RESPONSE } from '../data/selectors.json';
 import { BASE_URL, USER_LIST_URL, MAX_RESPONSE_TIME } from '../data/constants.json';
 import { StatusCodes } from 'http-status-codes';
 import { userListResponseBody, partialUsersBody } from '../data/response.json';
@@ -62,7 +62,7 @@ describe('Response Validation', () => {
 
   it('should appear on the UI', async () => {
     displayedResponse = await page.evaluate(() => {
-      const element = document.querySelector("[data-key='output-response']");
+      const element = document.querySelector(OUTPUT_RESPONSE);
       return JSON.parse(element.textContent);
     });
 

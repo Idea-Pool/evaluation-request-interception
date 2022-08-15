@@ -69,7 +69,7 @@ describe('Response Modification', () => {
 
       it('should appear on the UI', async () => {
         displayedResponse = await page.evaluate(() => {
-          const element = document.querySelector("[data-key='output-response']");
+          const element = document.querySelector(OUTPUT_RESPONSE);
           return JSON.parse(element.textContent);
         });
 
