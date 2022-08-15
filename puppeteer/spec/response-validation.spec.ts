@@ -11,7 +11,6 @@ describe('Response Validation', () => {
   let page: puppeteer.Page;
   const interceptedRequests: puppeteer.HTTPRequest[] = [];
   let performanceData: any;
-  let displayedResponse: any;
 
   before(async () => {
     browser = await puppeteer.launch();
@@ -61,12 +60,10 @@ describe('Response Validation', () => {
   });
 
   it('should appear on the UI', async () => {
-    displayedResponse = await page.evaluate((selector) => {
-      const element = document.querySelector(selector);
-      return JSON.parse(element.textContent);
-    }, OUTPUT_RESPONSE);
+    const displayedResponseElement = await page.$(OUTPUT_RESPONSE);
+    const displayedResponseText = await page.evaluate((element) => element.textContent, displayedResponseElement);
 
-    expect(displayedResponse).to.be.deep.equal(userListResponseBody);
+    expect(JSON.parse(displayedResponseText)).to.be.deep.equal(userListResponseBody);
   });
 
   after(async () => {
