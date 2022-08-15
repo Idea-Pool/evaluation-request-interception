@@ -34,7 +34,7 @@ describe('Response Validation', () => {
 
   describe('Response verification', () => {
     it('she status code should be 200', () =>
-      expect(interceptedRequests[0].response().status()).to.be.equal(StatusCodes.OK));
+      expect(interceptedRequests[0].response().status()).to.equal(StatusCodes.OK));
 
     describe('The response body', () => {
       let responseBody;
@@ -63,7 +63,7 @@ describe('Response Validation', () => {
     const displayedResponseElement = await page.$(OUTPUT_RESPONSE);
     const displayedResponseText = await page.evaluate((element) => element.textContent, displayedResponseElement);
 
-    expect(JSON.parse(displayedResponseText)).to.be.deep.equal(userListResponseBody);
+    expect(JSON.parse(displayedResponseText)).to.deep.equal(userListResponseBody);
   });
 
   after(async () => {

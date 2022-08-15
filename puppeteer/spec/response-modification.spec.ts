@@ -35,7 +35,7 @@ describe('Response Modification', () => {
         page.waitForResponse((response) => response.url() === USER_LIST_URL),
       ]);
 
-      return expect(interceptedRequest.response().status()).to.be.equal(mockResponse.status);
+      return expect(interceptedRequest.response().status()).to.equal(mockResponse.status);
     });
 
     describe('The modified response body', () => {
@@ -64,13 +64,13 @@ describe('Response Modification', () => {
         }));
 
       it('should match the schema', async () =>
-        expect(await interceptedRequest.response().json()).to.be.jsonSchema(mockResponseSchema));
+        expect(await interceptedRequest.response().json()).to.jsonSchema(mockResponseSchema));
 
       it('should appear on the UI', async () => {
         const displayedResponseElement = await page.$(OUTPUT_RESPONSE);
         const displayedResponseText = await page.evaluate((element) => element.textContent, displayedResponseElement);
 
-        expect(JSON.parse(displayedResponseText)).to.be.deep.equal(mockResponse.body);
+        expect(JSON.parse(displayedResponseText)).to.deep.equal(mockResponse.body);
       });
     });
   });
