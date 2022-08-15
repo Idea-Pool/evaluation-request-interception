@@ -64,7 +64,7 @@ describe('Response Modification', () => {
         }));
 
       it('should match the schema', async () =>
-        expect(await interceptedRequest.response().json()).to.jsonSchema(mockResponseSchema));
+        expect(await interceptedRequest.response().json()).to.be.jsonSchema(mockResponseSchema));
 
       it('should appear on the UI', async () => {
         const displayedResponseElement = await page.$(OUTPUT_RESPONSE);
