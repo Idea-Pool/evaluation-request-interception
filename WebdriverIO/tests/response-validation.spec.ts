@@ -27,6 +27,7 @@ describe('Response validation', () => {
       getUsers = $(`${usersSelector}`);
       browser.setupInterceptor();
       await getUsers.click();
+      request = await browser.getRequest(0);
     });
 
     it('should return only the required one request', async () => {
@@ -39,31 +40,25 @@ describe('Response validation', () => {
     });
 
     it('should return 200 status code', async () => {
-      request = await browser.getRequest(0);
       expect(request.response.statusCode).to.equal(expectedResponseStatusCode);
     });
 
     describe('The response body', () => {
       it('should return the appropriate full body schema', async () => {
-        request = await browser.getRequest(0);
         const validation: ValidatorResult = validate(request.response.body, multipleUsersSchema);
         expect(validation.valid).to.equal(true);
       });
 
       it('should fully match the original response', async () => {
-        request = await browser.getRequest(0);
         expect(request.response.body).to.deep.equal(users.originalFullUsersBody);
       });
 
       it('should partially match the original response', async () => {
-        request = await browser.getRequest(0);
         expect(request.response.body).to.deep.contain(users.originalPartialUsersBody);
       });
 
       it('should appear on the UI', async () => {
-        request = await browser.getRequest(0);
         const usersResponse = JSON.parse(await $(`${ usersResponseSelector }`).getText());
-
         expect(usersResponse).to.deep.equal(users.originalFullUsersBody);
       });
     });

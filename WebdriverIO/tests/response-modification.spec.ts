@@ -27,6 +27,7 @@ describe('Response modification', () => {
       const mockResponse = await browser.mock(`**${ expectedURL }`, { method: 'get' });
       mockResponse.respond(users.modifiedFullUsersBody, { statusCode: modifiedResponseStatusCode });
       await getUsers.click();
+      request = await browser.getRequest(0);
     });
 
     it('should return only the required one request', async () => {
@@ -39,31 +40,25 @@ describe('Response modification', () => {
     });
 
     it('should return 202 status code after modifying the response', async () => {
-      request = await browser.getRequest(0);
       expect(request.response.statusCode).to.equal(modifiedResponseStatusCode);
     });
 
     describe('The modified response body', () => {
       it('should return the appropriate full body schema', async () => {
-        request = await browser.getRequest(0);
         const validation: ValidatorResult = validate(request.response.body, multipleUsersSchema);
         expect(validation.valid).to.equal(true);
       });
 
       it('should fully match the modified response', async () => {
-        request = await browser.getRequest(0);
         expect(request.response.body).to.deep.equal(users.modifiedFullUsersBody);
       });
 
       it('should partially match the modified response', async () => {
-        request = await browser.getRequest(0);
         expect(request.response.body).to.deep.contain(users.modifiedPartialUsersBody);
       });
 
       it('should appear on the UI', async () => {
-        request = await browser.getRequest(0);
         const usersResponse = JSON.parse(await $(`${ usersResponseSelector }`).getText());
-
         expect(usersResponse).to.deep.equal(users.modifiedFullUsersBody);
       });
     });
