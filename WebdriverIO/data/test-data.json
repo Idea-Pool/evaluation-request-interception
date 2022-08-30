@@ -3,5 +3,6 @@
   "expectedResponseStatusCode": 200,
   "expectedRequestMethod": "GET",
   "modifiedResponseStatusCode": 202,
-  "usersSelector": "[data-id='users']"
+  "usersSelector": "[data-id='users']",
+  "usersResponseSelector": "[data-key=output-response]"
 }
