@@ -2,7 +2,13 @@ import { expect } from 'chai';
 import WdioInterceptorService from 'wdio-intercept-service';
 import { validate, ValidatorResult } from 'jsonschema';
 
-import { expectedRequestMethod, expectedResponseStatusCode, expectedURL, usersSelector } from '../data/test-data.json';
+import {
+  expectedRequestMethod,
+  expectedResponseStatusCode,
+  expectedURL,
+  usersSelector,
+  usersResponseSelector,
+} from '../data/test-data.json';
 import * as users from '../data/users.json';
 import { multipleUsersSchema } from '../data/list-users-schema';
 
@@ -21,6 +27,7 @@ describe('Response validation', () => {
       getUsers = $(`${usersSelector}`);
       browser.setupInterceptor();
       await getUsers.click();
+      request = await browser.getRequest(0);
     });
 
     it('should return only the required one request', async () => {
@@ -32,26 +39,27 @@ describe('Response validation', () => {
       await browser.assertExpectedRequestsOnly();
     });
 
-    it('should return 200 status code', async () => {
-      request = await browser.getRequest(0);
+    it('should return 200 status code', () => {
       expect(request.response.statusCode).to.equal(expectedResponseStatusCode);
     });
 
     describe('The response body', () => {
-      it('should return the appropriate full body schema', async () => {
-        request = await browser.getRequest(0);
+      it('should return the appropriate full body schema', () => {
         const validation: ValidatorResult = validate(request.response.body, multipleUsersSchema);
         expect(validation.valid).to.equal(true);
       });
 
-      it('should fully match the original response', async () => {
-        request = await browser.getRequest(0);
+      it('should fully match the original response', () => {
         expect(request.response.body).to.deep.equal(users.originalFullUsersBody);
       });
 
-      it('should partially match the original response', async () => {
-        request = await browser.getRequest(0);
+      it('should partially match the original response', () => {
         expect(request.response.body).to.deep.contain(users.originalPartialUsersBody);
+      });
+
+      it('should appear on the UI', async () => {
+        const usersResponse = JSON.parse(await $(`${usersResponseSelector}`).getText());
+        expect(usersResponse).to.deep.equal(users.originalFullUsersBody);
       });
     });
   });

@@ -1,0 +1,4 @@
+{
+  "users": "[data-id='users']",
+  "uiUsersResponse": "[data-key=output-response]"
+}

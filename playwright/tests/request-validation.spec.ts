@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import * as selectors from '../data/selectors.json';
 
 test.describe('request validation', () => {
   let request;
@@ -6,7 +7,7 @@ test.describe('request validation', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('');
 
-    [request] = await Promise.all([page.waitForRequest('**/users?page=2'), page.click('[data-id = "users"]')]);
+    [request] = await Promise.all([page.waitForRequest('**/users?page=2'), page.click(selectors.users)]);
   });
 
   test('Should be a GET request method for listing users', () => {

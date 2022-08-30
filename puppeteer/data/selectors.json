@@ -1,3 +1,4 @@
 {
-  "USER_LIST_SELECTOR": "[data-id='users']"
+  "USER_LIST_SELECTOR": "[data-id='users']",
+  "OUTPUT_RESPONSE": "[data-key=output-response]"
 }

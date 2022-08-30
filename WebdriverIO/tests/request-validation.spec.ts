@@ -8,10 +8,13 @@ describe('Request validation', () => {
   });
 
   describe('Request verification', () => {
+    let request;
+
     before(async () => {
       const getUsers = $(`${usersSelector}`);
       browser.setupInterceptor();
       await getUsers.click();
+      request = await browser.getRequest(0);
     });
 
     it('should return only the required one request', async () => {
@@ -23,13 +26,11 @@ describe('Request validation', () => {
       await browser.assertExpectedRequestsOnly();
     });
 
-    it('should be a GET method', async () => {
-      const request = await browser.getRequest(0);
+    it('should be a GET method', () => {
       expect(request.method).to.equal(expectedRequestMethod);
     });
 
-    it('should match the URL', async () => {
-      const request = await browser.getRequest(0);
+    it('should match the URL', () => {
       expect(request.url).to.contain(expectedURL);
     });
   });
