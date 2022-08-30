@@ -11,7 +11,7 @@ describe('Response modification', () => {
     await browser.url('/');
   });
 
-  describe('Modified response verification', () => {
+  describe('Modified response verification', ( ) => {
     let request;
 
     before(async () => {
