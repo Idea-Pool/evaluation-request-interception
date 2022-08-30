@@ -33,7 +33,7 @@ describe('Request Modification', () => {
         page.click(USER_LIST_SELECTOR),
         page.waitForResponse((response) => response.url() === USER_LIST_URL),
       ]);
-      expect(interceptedRequest.method()).to.be.equal('GET');
+      expect(interceptedRequest.method()).to.equal('GET');
     });
 
     it('should have the modified URL', async () => {
@@ -67,11 +67,11 @@ describe('Request Modification', () => {
         page.waitForResponse((response) => response.url() === USER_LIST_URL),
       ]);
 
-      expect(interceptedRequest.response().json()).to.be.eventually.deep.equal(expectedResponse.singleUserResponseBody);
+      expect(interceptedRequest.response().json()).to.eventually.deep.equal(expectedResponse.singleUserResponseBody);
 
-      expect(interceptedRequestPath).to.be.equal(SINGLE_USER_PATH);
+      expect(interceptedRequestPath).to.equal(SINGLE_USER_PATH);
 
-      return expect(interceptedRequest.headers().referer).to.be.equal(BASE_URL);
+      return expect(interceptedRequest.headers().referer).to.equal(BASE_URL);
     });
 
     it('should have an additional property', async () => {

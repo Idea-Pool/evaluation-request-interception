@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer';
-import { USER_LIST_SELECTOR } from '../data/selectors.json';
+import { USER_LIST_SELECTOR, OUTPUT_RESPONSE } from '../data/selectors.json';
 import { BASE_URL, USER_LIST_URL, MAX_RESPONSE_TIME } from '../data/constants.json';
 import { StatusCodes } from 'http-status-codes';
 import { userListResponseBody, partialUsersBody } from '../data/response.json';
@@ -34,7 +34,7 @@ describe('Response Validation', () => {
 
   describe('Response verification', () => {
     it('she status code should be 200', () =>
-      expect(interceptedRequests[0].response().status()).to.be.equal(StatusCodes.OK));
+      expect(interceptedRequests[0].response().status()).to.equal(StatusCodes.OK));
 
     describe('The response body', () => {
       let responseBody;
@@ -57,6 +57,13 @@ describe('Response Validation', () => {
     const responseTime = performanceData.responseEnd - performanceData.requestStart;
 
     return expect(responseTime).to.be.below(MAX_RESPONSE_TIME);
+  });
+
+  it('should appear on the UI', async () => {
+    const displayedResponseElement = await page.$(OUTPUT_RESPONSE);
+    const displayedResponseText = await page.evaluate((element) => element.textContent, displayedResponseElement);
+
+    expect(JSON.parse(displayedResponseText)).to.deep.equal(userListResponseBody);
   });
 
   after(async () => {
