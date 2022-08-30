@@ -32,8 +32,8 @@ test.describe('response modification', () => {
   });
 
   test('should appear on the UI', async ({ page }) => {
-    let text = await page.locator(selectors.uiUsersResponse).textContent();
-    text = JSON.parse(text);
-    expect(text).toEqual(modifiedBody);
+    const text = await page.locator(selectors.uiUsersResponse).textContent();
+    const parsedUITextContent = JSON.parse(text);
+    expect(parsedUITextContent).toEqual(modifiedBody);
   });
 });

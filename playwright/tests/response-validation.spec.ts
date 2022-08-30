@@ -46,8 +46,8 @@ test.describe('response validation', () => {
   });
 
   test('should appear on the UI', async ({ page }) => {
-    let text = await page.locator(selectors.uiUsersResponse).textContent();
-    text = JSON.parse(text);
-    expect(text).toEqual(fullBody);
+    const text = await page.locator(selectors.uiUsersResponse).textContent();
+    const parsedUITextContent = JSON.parse(text);
+    expect(parsedUITextContent).toEqual(fullBody);
   });
 });
