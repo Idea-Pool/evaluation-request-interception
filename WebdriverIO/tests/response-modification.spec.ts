@@ -2,12 +2,7 @@ import WdioInterceptorService from 'wdio-intercept-service';
 import { validate, ValidatorResult } from 'jsonschema';
 import { expect } from 'chai';
 
-import {
-  expectedRequestMethod,
-  expectedURL,
-  modifiedResponseStatusCode,
-  usersSelector,
-} from '../data/test-data.json';
+import { expectedRequestMethod, expectedURL, modifiedResponseStatusCode, usersSelector } from '../data/test-data.json';
 import * as users from '../data/users.json';
 import { multipleUsersSchema } from '../data/list-users-schema';
 
@@ -23,7 +18,7 @@ describe('Response modification', () => {
       const getUsers = $(`${usersSelector}`);
       browser.setupInterceptor();
 
-      const mockResponse = await browser.mock(`**${ expectedURL }`, { method: 'get' });
+      const mockResponse = await browser.mock(`**${expectedURL}`, { method: 'get' });
       mockResponse.respond(users.modifiedFullUsersBody, { statusCode: modifiedResponseStatusCode });
       await getUsers.click();
     });
