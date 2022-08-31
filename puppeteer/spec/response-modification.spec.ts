@@ -54,7 +54,7 @@ describe('Response Modification', () => {
         ]);
       });
 
-      it('should match exactly', async () => {
+      it('should match exactly', () => {
         return expect(interceptedRequest.response().json()).to.eventually.be.deep.equal(mockResponse.body);
       });
 

@@ -39,26 +39,26 @@ describe('Response validation', () => {
       await browser.assertExpectedRequestsOnly();
     });
 
-    it('should return 200 status code', async () => {
+    it('should return 200 status code', () => {
       expect(request.response.statusCode).to.equal(expectedResponseStatusCode);
     });
 
     describe('The response body', () => {
-      it('should return the appropriate full body schema', async () => {
+      it('should return the appropriate full body schema', () => {
         const validation: ValidatorResult = validate(request.response.body, multipleUsersSchema);
         expect(validation.valid).to.equal(true);
       });
 
-      it('should fully match the original response', async () => {
+      it('should fully match the original response', () => {
         expect(request.response.body).to.deep.equal(users.originalFullUsersBody);
       });
 
-      it('should partially match the original response', async () => {
+      it('should partially match the original response', () => {
         expect(request.response.body).to.deep.contain(users.originalPartialUsersBody);
       });
 
       it('should appear on the UI', async () => {
-        const usersResponse = JSON.parse(await $(`${ usersResponseSelector }`).getText());
+        const usersResponse = JSON.parse(await $(`${usersResponseSelector}`).getText());
         expect(usersResponse).to.deep.equal(users.originalFullUsersBody);
       });
     });

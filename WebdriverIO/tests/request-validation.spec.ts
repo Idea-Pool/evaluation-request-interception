@@ -26,11 +26,11 @@ describe('Request validation', () => {
       await browser.assertExpectedRequestsOnly();
     });
 
-    it('should be a GET method', async () => {
+    it('should be a GET method', () => {
       expect(request.method).to.equal(expectedRequestMethod);
     });
 
-    it('should match the URL', async () => {
+    it('should match the URL', () => {
       expect(request.url).to.contain(expectedURL);
     });
   });
