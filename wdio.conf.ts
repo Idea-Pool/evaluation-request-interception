@@ -47,11 +47,11 @@ export const config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: ['./WebdriverIO/tests/**/*.spec.ts'],
+  specs: ['./webdriverIO/tests/**/*.spec.ts'],
   suites: {
-    requestValidation: ['./WebdriverIO/tests/request-validation.spec.ts'],
-    responseModification: ['./WebdriverIO/tests/response-modification.spec.ts'],
-    responseValidation: ['./WebdriverIO/tests/response-validation.spec.ts'],
+    requestValidation: ['./webdriverIO/tests/request-validation.spec.ts'],
+    responseModification: ['./webdriverIO/tests/response-modification.spec.ts'],
+    responseValidation: ['./webdriverIO/tests/response-validation.spec.ts'],
   },
   // Patterns to exclude.
   exclude: [
