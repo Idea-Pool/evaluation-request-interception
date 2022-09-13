@@ -64,4 +64,4 @@ Although selenium and webdriver are used for e2e and especially UI testing, you 
 - [Playwright request interception](https://www.youtube.com/watch?v=-pH6Dax-OyY)
 - [Intercept HTTP requests](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Intercept_HTTP_requests)
 - [Testing Strategies with Cypress](https://docs.cypress.io/guides/guides/network-requests#Testing-Strategies)
-- [WDIO's Intercept Service]()
+- [WDIO's Intercept Service](https://webdriver.io/docs/wdio-intercept-service/)
