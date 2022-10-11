@@ -28,6 +28,7 @@
     "test:cypress:response-modification": "cypress run --spec cypress/interceptors/response-modification.spec.ts",
     "test:cypress:request-validation": "cypress run --spec cypress/interceptors/request-validation.spec.ts",
     "test:cypress:request-modification": "cypress run --spec cypress/interceptors/request-modification.spec.ts",
+    "test:cypress:request-blocking": "cypress run --spec cypress/interceptors/request-blocking.spec.ts",
     "test:puppeteer:all": "ts-mocha ./puppeteer/spec/*.ts",
     "test:puppeteer:response-validation": "ts-mocha ./puppeteer/spec/response-validation.spec.ts",
     "test:puppeteer:response-modification": "ts-mocha ./puppeteer/spec/response-modification.spec.ts",
