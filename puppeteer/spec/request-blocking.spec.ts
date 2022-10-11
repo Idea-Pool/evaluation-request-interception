@@ -34,11 +34,14 @@ describe('Request Blocking', () => {
       await page.click(USER_LIST_SELECTOR);
     });
 
-    it("should not let the response text appear in the UI's response section", async () => {
-      const displayedResponseElement = await page.$(OUTPUT_RESPONSE);
-      const isInViewPort = await displayedResponseElement.isIntersectingViewport();
+    it('the request should fail', () => {
       expect(errorText).to.equal('net::ERR_FAILED');
-      return expect(isInViewPort).to.be.false;
+    });
+
+    it("should not let the response text box appear in the UI's response section", async () => {
+      const displayedResponseElement = await page.$(OUTPUT_RESPONSE);
+
+      return expect(await displayedResponseElement.isIntersectingViewport()).to.be.false;
     });
 
     after(async () => {
