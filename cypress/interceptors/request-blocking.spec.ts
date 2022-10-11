@@ -1,7 +1,7 @@
 import { selectors } from '../fixtures/test-data.json';
 
 describe('Request Blocking', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('/');
     cy.intercept('GET', '/api/users?page=2', (req) => req.destroy());
     cy.get(selectors.users).click();
