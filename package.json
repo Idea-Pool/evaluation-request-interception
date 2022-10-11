@@ -22,6 +22,7 @@
     "test:webdriverio:response-validation": "wdio run wdio.conf.ts --suite responseValidation",
     "test:webdriverio:response-modification": "wdio run wdio.conf.ts --suite responseModification",
     "test:webdriverio:request-validation": "wdio run wdio.conf.ts --suite requestValidation",
+    "test:webdriverio:request-blocking": "wdio run wdio.conf.ts --suite requestBlocking",
     "test:cypress:all": "cypress run",
     "test:cypress:gui": "cypress open",
     "test:cypress:response-validation": "cypress run --spec cypress/interceptors/response-validation.spec.ts",
