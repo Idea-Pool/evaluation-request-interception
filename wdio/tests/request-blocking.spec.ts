@@ -16,16 +16,9 @@ describe('Request Blocking', () => {
       await getUsers.click();
     });
 
-    it("should return no requests", async () => {
-      try {
-        await browser.getRequest(0);
-      } catch (error) {
-        expect(error.message).to.equal('Could not find request with index 0');
-      }
-    });
 
     it("should not let the response text appear in the UI's response section", async () => {
-      const usersResponse = await $(`${usersResponseSelector}`).getText();
+      const usersResponse = await $(usersResponseSelector).getText();
       expect(usersResponse).to.be.empty;
     });
   });
