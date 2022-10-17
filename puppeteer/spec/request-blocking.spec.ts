@@ -7,7 +7,6 @@ describe('Request Blocking', () => {
   describe('Blocking the request', () => {
     let browser: puppeteer.Browser;
     let page: puppeteer.Page;
-    let interceptedRequest: puppeteer.HTTPRequest;
     let errorText: string;
 
     before(async () => {
