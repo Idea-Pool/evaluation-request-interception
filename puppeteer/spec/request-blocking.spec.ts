@@ -19,9 +19,8 @@ describe('Request Blocking', () => {
 
       page.on('request', (request) => {
         if (request.url() === USER_LIST_URL) {
-          interceptedRequest = request;
+          request.abort();
         }
-        request.abort();
       });
 
       page.on('requestfailed', (request) => {
