@@ -34,7 +34,7 @@
     "test:puppeteer:response-modification": "ts-mocha ./puppeteer/spec/response-modification.spec.ts",
     "test:puppeteer:request-validation": "ts-mocha ./puppeteer/spec/request-validation.spec.ts",
     "test:puppeteer:request-modification": "ts-mocha ./puppeteer/spec/request-modification.spec.ts",
-    "test:puppeteer:request-blocking": "ts-mocha ./puppeteer/spec/request-spec.ts",
+    "test:puppeteer:request-blocking": "ts-mocha ./puppeteer/spec/request-blocking.spec.ts",
     "test:playwright:all": "playwright test",
     "test:playwright:response-validation": "playwright test response-validation.spec.ts",
     "test:playwright:response-modification": "playwright test response-modification.spec.ts",
