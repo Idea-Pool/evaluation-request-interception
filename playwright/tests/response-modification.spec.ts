@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { StatusCodes } from 'http-status-codes';
+import * as statusCodes from '../data/status-codes.json';
 import { modifiedBody } from '../data/response-body';
 import * as selectors from '../data/selectors.json';
 
@@ -24,7 +24,8 @@ test.describe('response modification', () => {
   });
 
   test('the status code should not be 200', () => {
-    expect(responseStatus).not.toBe(StatusCodes.OK);
+    expect(responseStatus).not.toBe(statusCodes.okStatusCode);
+    expect(responseStatus).toBe(statusCodes.modifiedStatusCode);
   });
 
   test('should match exactly', () => {
