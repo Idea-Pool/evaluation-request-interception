@@ -16,7 +16,6 @@ describe('Request Blocking', () => {
       await getUsers.click();
     });
 
-
     it("should not let the response text appear in the UI's response section", async () => {
       const usersResponse = await $(usersResponseSelector).getText();
       expect(usersResponse).to.be.empty;
