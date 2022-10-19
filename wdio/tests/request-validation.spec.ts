@@ -8,7 +8,7 @@ describe('Request validation', () => {
   });
 
   describe('Request verification', () => {
-    let request;
+    let request: AsyncSync<WdioInterceptorService.CompletedRequest>;
 
     before(async () => {
       const getUsers = $(`${usersSelector}`);
