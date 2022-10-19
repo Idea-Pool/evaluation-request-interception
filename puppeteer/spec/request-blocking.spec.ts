@@ -2,6 +2,7 @@ import puppeteer, { HTTPResponse } from 'puppeteer';
 import { USER_LIST_SELECTOR, OUTPUT_RESPONSE } from '../data/selectors.json';
 import { BASE_URL, USER_LIST_URL } from '../data/constants.json';
 import { expect } from 'chai';
+import { resolve } from 'path';
 
 describe('Request Blocking', () => {
   describe('Blocking the request', () => {
@@ -31,7 +32,14 @@ describe('Request Blocking', () => {
       });
 
       await page.click(USER_LIST_SELECTOR);
-      await new Promise(res=>setTimeout(res,10000))
+      await new Promise<void>((res, rej) => {
+        setInterval(() => {
+          if (errorText) {
+            return res();
+          }
+        });
+        setTimeout(rej, 15000, new Error('Timeout'));
+      });
     });
 
     it('the request should fail', () => {
