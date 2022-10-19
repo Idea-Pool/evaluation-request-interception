@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import * as statusCodes from '../data/status-codes.json';
+import { StatusCodes } from 'http-status-codes';
 import { partialBody } from '../data/response-body';
 import { fullBody } from '../data/users';
 import * as selectors from '../data/selectors.json';
@@ -17,7 +17,7 @@ test.describe('response validation', () => {
   });
 
   test('the status code should be 200', () => {
-    expect(response.status()).toBe(statusCodes.okStatusCode);
+    expect(response.status()).toBe(StatusCodes.OK);
   });
 
   test('should match partially', () => {
