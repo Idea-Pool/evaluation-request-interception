@@ -32,6 +32,7 @@ describe('Request Blocking', () => {
       });
 
       await page.click(USER_LIST_SELECTOR);
+      
       await new Promise<void>((res, rej) => {
         setInterval(() => {
           if (errorText) {
