@@ -31,6 +31,7 @@ describe('Request Blocking', () => {
       });
 
       await page.click(USER_LIST_SELECTOR);
+      await new Promise(res=>setTimeout(res,10000))
     });
 
     it('the request should fail', () => {
