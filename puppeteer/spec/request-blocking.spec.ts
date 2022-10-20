@@ -9,6 +9,7 @@ describe('Request Blocking', () => {
     let browser: puppeteer.Browser;
     let page: puppeteer.Page;
     let errorText: string;
+    let intervalId: any;
 
     before(async () => {
       browser = await puppeteer.launch();
@@ -29,18 +30,21 @@ describe('Request Blocking', () => {
         if (request.url() === USER_LIST_URL) {
           ({ errorText } = request.failure());
         }
+        request.continue();
       });
 
       await page.click(USER_LIST_SELECTOR);
-      
+
       await new Promise<void>((res, rej) => {
-        setInterval(() => {
+        intervalId = setInterval(() => {
           if (errorText) {
             return res();
           }
         });
+
         setTimeout(rej, 15000, new Error('Timeout'));
       });
+      clearInterval(intervalId);
     });
 
     it('the request should fail', () => {
