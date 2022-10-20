@@ -1,5 +1,6 @@
 import { usersResponseSelector, usersSelector, expectedURL } from '../data/test-data.json';
 import { expect } from 'chai';
+import { Mock } from 'webdriverio/build/types'
 
 describe('Request Blocking', () => {
   before(async () => {
@@ -7,24 +8,24 @@ describe('Request Blocking', () => {
   });
 
   describe('Blocking the request', () => {
-    let beforeActionResponse: string;
-    let afterActionResponse: string;
+    let mock: Mock;
 
     before(async () => {
       const getUsers = $(`${usersSelector}`);
       browser.setupInterceptor();
+      mock = await browser.mock(`**${expectedURL}`, { method: 'get' });
+      mock.abort('Aborted');
       await getUsers.click();
-      beforeActionResponse = await $(usersResponseSelector).getText();
-
-      const mockResponse = await browser.mock(`**${expectedURL}`, { method: 'get' });
-      mockResponse.abort('Aborted');
-      await getUsers.click();
-      afterActionResponse = await $(usersResponseSelector).getText();
     });
 
-    it("should not let the response text appear in the UI's response section", () => {
-      expect(beforeActionResponse).to.be.not.empty;
-      expect(afterActionResponse).to.be.empty;
+    it("the request should fail", () => {
+      const errorReason = (mock as any).respondOverwrites[0].errorReason;
+      expect(errorReason).to.equal('Aborted');
+    });
+
+    it("the UI's response section should not be displayed", async () => {
+      const response = await $(usersResponseSelector).getText();
+      expect(response).to.be.empty;
     });
   });
 });
