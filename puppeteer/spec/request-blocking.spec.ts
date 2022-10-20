@@ -9,7 +9,7 @@ describe('Request Blocking', () => {
     let browser: puppeteer.Browser;
     let page: puppeteer.Page;
     let errorText: string;
-    let intervalId: any;
+    let intervalId: NodeJS.Timer;
 
     before(async () => {
       browser = await puppeteer.launch();
