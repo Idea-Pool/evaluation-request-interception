@@ -1,22 +1,21 @@
 import * as selectors from '../data/selectors.json';
-import { expect, test } from '@playwright/test';
+import {expect, test} from '@playwright/test';
 
 test.describe('Request Blocking', () => {
-    let beforeActionVisibility;
-    let afterActionVisibility;
 
     test.beforeEach(async ({page}) => {
         await page.goto('');
-        await page.click(selectors.users);
-        beforeActionVisibility = await page.locator(selectors.uiUsersResponse).isVisible();
-
         await page.route("**/users?page=2", route => route.abort());
         await page.click(selectors.users);
-        afterActionVisibility = await page.locator(selectors.uiUsersResponse).isVisible();
     });
 
-    test("should not let the response text appear in the UI's response section", async () => {
-        await expect(beforeActionVisibility).toBe(true);
-        await expect(afterActionVisibility).toBe(false);
+    test("the response text should be visible before the abort", async ({page}) => {
+        const [request] = await Promise.all([page.waitForRequest('**/users?page=2'), page.click(selectors.users)]);
+        const {errorText} = request.failure();
+        expect(errorText).toEqual('net::ERR_FAILED');
+    });
+
+    test("the response text should not be visible after the abort", async ({page}) => {
+        await expect(page.locator(selectors.uiUsersResponse)).not.toBeVisible();
     });
 });
