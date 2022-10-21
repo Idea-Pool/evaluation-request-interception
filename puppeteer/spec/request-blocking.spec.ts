@@ -9,9 +9,10 @@ describe('Request Blocking', () => {
     let browser: puppeteer.Browser;
     let page: puppeteer.Page;
     let errorText: string;
-    let intervalId: NodeJS.Timer;
 
     before(async () => {
+      let intervalId: NodeJS.Timer;
+
       browser = await puppeteer.launch();
       page = await browser.newPage();
       await page.setCacheEnabled(false);
@@ -30,7 +31,6 @@ describe('Request Blocking', () => {
         if (request.url() === USER_LIST_URL) {
           ({ errorText } = request.failure());
         }
-        request.continue();
       });
 
       await page.click(USER_LIST_SELECTOR);
