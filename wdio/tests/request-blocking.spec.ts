@@ -1,6 +1,7 @@
 import { usersResponseSelector, usersSelector, expectedURL } from '../data/test-data.json';
 import { expect } from 'chai';
 import { Mock } from 'webdriverio/build/types'
+import DevtoolsInterception from 'webdriverio/build/utils/interception/devtools';
 
 describe('Request Blocking', () => {
   before(async () => {
@@ -19,7 +20,7 @@ describe('Request Blocking', () => {
     });
 
     it("the request should fail", () => {
-      const errorReason = (mock as any).respondOverwrites[0].errorReason;
+      const errorReason = (mock as DevtoolsInterception).respondOverwrites[0].errorReason;
       expect(errorReason).to.equal('Aborted');
     });
 
