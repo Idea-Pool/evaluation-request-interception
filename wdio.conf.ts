@@ -52,6 +52,7 @@ export const config = {
     requestValidation: ['./wdio/tests/request-validation.spec.ts'],
     responseModification: ['./wdio/tests/response-modification.spec.ts'],
     responseValidation: ['./wdio/tests/response-validation.spec.ts'],
+    requestBlocking: ['./wdio/tests/request-blocking.spec.ts'],
   },
   // Patterns to exclude.
   exclude: [

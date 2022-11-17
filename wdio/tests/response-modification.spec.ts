@@ -1,7 +1,6 @@
 import WdioInterceptorService from 'wdio-intercept-service';
 import { validate, ValidatorResult } from 'jsonschema';
 import { expect } from 'chai';
-
 import {
   expectedRequestMethod,
   expectedURL,
@@ -18,7 +17,7 @@ describe('Response modification', () => {
   });
 
   describe('Modified response verification', () => {
-    let request;
+    let request: WdioInterceptorService.CompletedRequest;
 
     before(async () => {
       const getUsers = $(`${usersSelector}`);
@@ -58,7 +57,7 @@ describe('Response modification', () => {
       });
 
       it('should appear on the UI', async () => {
-        const usersResponse = JSON.parse(await $(`${usersResponseSelector}`).getText());
+        const usersResponse: string = JSON.parse(await $(`${usersResponseSelector}`).getText());
         expect(usersResponse).to.deep.equal(users.modifiedFullUsersBody);
       });
     });
