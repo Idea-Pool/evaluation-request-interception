@@ -39,7 +39,8 @@
     "test:playwright:all": "playwright test",
     "test:playwright:response-validation": "playwright test response-validation.spec.ts",
     "test:playwright:response-modification": "playwright test response-modification.spec.ts",
-    "test:playwright:request-validation": "playwright test request-validation.spec.ts"
+    "test:playwright:request-validation": "playwright test request-validation.spec.ts",
+    "test:playwright:request-blocking": "playwright test request-blocking"
   },
   "dependencies": {
     "@cypress/schema-tools": "^4.7.9",

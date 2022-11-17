@@ -3,10 +3,12 @@ import { StatusCodes } from 'http-status-codes';
 import { partialBody } from '../data/response-body';
 import { fullBody } from '../data/users';
 import * as selectors from '../data/selectors.json';
+import { Response } from 'playwright-core';
+import { Serializable } from 'worker_threads';
 
 test.describe('response validation', () => {
-  let response;
-  let responseBody;
+  let response: Response;
+  let responseBody: Promise<Serializable>;
   const MAX_RESPONSE_TIME = 1000;
 
   test.beforeEach(async ({ page }) => {
@@ -47,7 +49,7 @@ test.describe('response validation', () => {
 
   test('should appear on the UI', async ({ page }) => {
     const text = await page.locator(selectors.uiUsersResponse).textContent();
-    const parsedUITextContent = JSON.parse(text);
+    const parsedUITextContent: string = JSON.parse(text);
     expect(parsedUITextContent).toEqual(fullBody);
   });
 });

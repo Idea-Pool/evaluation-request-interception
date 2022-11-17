@@ -1,8 +1,9 @@
 import { expect, test } from '@playwright/test';
 import * as selectors from '../data/selectors.json';
+import { Request } from 'playwright-core';
 
 test.describe('request validation', () => {
-  let request;
+  let request: Request;
 
   test.beforeEach(async ({ page }) => {
     await page.goto('');
